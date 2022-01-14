@@ -1,4 +1,8 @@
 package com.ronen.sagy.firevest.custom_widgets;
+/**
+ * I extracted this file from some library and managed to
+ * get only the thing I need instead of all the lib
+ */
 
 import android.annotation.SuppressLint;
 import android.content.Context;

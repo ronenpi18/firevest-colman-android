@@ -1,4 +1,4 @@
-package com.ronen.sagy.firevest;
+package com.ronen.sagy.firevest.activities;
 
 // android is deprecated, studio suggested to use androidx https://developer.android.com/jetpack/androidx
 
@@ -15,6 +15,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.ronen.sagy.firevest.R;
+import com.ronen.sagy.firevest.activities.fragments.ActivityFragment;
 import com.ronen.sagy.firevest.adapters.ViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         ArrayList<Fragment> fragList = new ArrayList<>();
 //        fragList.add(new AccountFragment());
 //        fragList.add(new SwipeViewFragment());
-//        fragList.add(new ActivityFragment());
+        fragList.add(new ActivityFragment());
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(fragList, getSupportFragmentManager());
         viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(pagerAdapter);

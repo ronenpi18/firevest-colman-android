@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Point;
-import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -25,18 +24,18 @@ public class Utils {
 
     private static final String TAG = "Utils";
 
-    public static List<Profile> loadProfiles(Context context){
-        try{
+    public static List<Profile> loadProfiles(Context context) {
+        try {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             JSONArray array = new JSONArray(loadJSONFromAsset(context, "profiles.json"));
             List<Profile> profileList = new ArrayList<>();
-            for(int i=0;i<array.length();i++){
+            for (int i = 0; i < array.length(); i++) {
                 Profile profile = gson.fromJson(array.getString(i), Profile.class);
                 profileList.add(profile);
             }
             return profileList;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -47,7 +46,7 @@ public class Utils {
         InputStream is;
         try {
             AssetManager manager = context.getAssets();
-            Log.d(TAG,"path "+jsonFileName);
+            Log.d(TAG, "path " + jsonFileName);
             is = manager.open(jsonFileName);
             int size = is.available();
             byte[] buffer = new byte[size];
@@ -61,21 +60,18 @@ public class Utils {
         return json;
     }
 
-    public static Point getDisplaySize(WindowManager windowManager){
+    public static Point getDisplaySize(WindowManager windowManager) {
         try {
-            if(Build.VERSION.SDK_INT > 16) {
-                Display display = windowManager.getDefaultDisplay();
-                DisplayMetrics displayMetrics = new DisplayMetrics();
-                display.getMetrics(displayMetrics);
-                return new Point(displayMetrics.widthPixels, displayMetrics.heightPixels);
-            }else{
-                return new Point(0, 0);
-            }
-        }catch (Exception e){
+            Display display = windowManager.getDefaultDisplay();
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            display.getMetrics(displayMetrics);
+            return new Point(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        } catch (Exception e) {
             e.printStackTrace();
             return new Point(0, 0);
         }
     }
+
     public static int dpToPx(int dp) {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
