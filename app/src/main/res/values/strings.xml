@@ -2,4 +2,16 @@
     <string name="app_name">firevest</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_slider_1">txt slider 1</string>
+    <string name="title_slider_2">txt slider 2</string>
+    <string name="title_slider_3">txt slider 3</string>
+    <string name="title_slider_4">txt slider 4</string>
+    <string name="title_slider_5">txt slider 5</string>
+    <string name="title_slider_6">text slider 6</string>
+    <string name="description_slider_1">desc slider 1</string>
+    <string name="description_slider_2">desc slider 2</string>
+    <string name="description_slider_3">desc slider 3</string>
+    <string name="description_slider_4">desc slider 4</string>
+    <string name="description_slider_5">desc slider 5</string>
+    <string name="description_slider_6">desc slider 6</string>
 </resources>

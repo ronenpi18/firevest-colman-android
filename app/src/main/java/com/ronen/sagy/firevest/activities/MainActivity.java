@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavig
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ronen.sagy.firevest.R;
+import com.ronen.sagy.firevest.activities.fragments.AccountFragment;
 import com.ronen.sagy.firevest.activities.fragments.ActivityFragment;
 import com.ronen.sagy.firevest.adapters.ViewPagerAdapter;
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
 
         ArrayList<Fragment> fragList = new ArrayList<>();
-//        fragList.add(new AccountFragment());
+        fragList.add(new AccountFragment());
 //        fragList.add(new SwipeViewFragment());
         fragList.add(new ActivityFragment());
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(fragList, getSupportFragmentManager());
@@ -58,17 +59,17 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//        switch (menuItem.getItemId()) {
-//            case R.id.account:
-//                viewPager.setCurrentItem(0);
-//                break;
-//            case R.id.fire:
-//                viewPager.setCurrentItem(1);
-//                break;
+        switch (menuItem.getItemId()) {
+            case R.id.account:
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.fire:
+                viewPager.setCurrentItem(1);
+                break;
 //            case R.id.chat:
 //                viewPager.setCurrentItem(2);
 //                break;
-//        }
+        }
         return true;
     }
 }

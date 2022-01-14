@@ -11,12 +11,12 @@
         android:layout_height="wrap_content"
         android:gravity="center">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/image_slider"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="20dp"-->
-<!--            android:src="@drawable/bolt"-->
-<!--            android:layout_marginEnd="10dp"/>-->
+        <ImageView
+            android:id="@+id/image_slider"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/bolt"
+            android:layout_marginEnd="10dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_slider_title"
