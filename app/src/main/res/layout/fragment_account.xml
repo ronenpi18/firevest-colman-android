@@ -47,8 +47,9 @@
 
                 <TextView
                     android:layout_width="wrap_content"
+                    android:id="@+id/First_title_account"
                     android:layout_height="wrap_content"
-                    android:text="Gabriel, 24"
+                    android:text="500 Startups, Investor"
                     android:textColor="@color/md_black_1000"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -58,13 +59,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Développeur"
+                    android:id="@+id/second_title_account"
+                    android:text="Cyber Security"
                     android:textColor="@color/md_black_1000"
                     android:textSize="14sp"
                     android:layout_gravity="center"/>
 
                 <TextView
                     android:layout_width="match_parent"
+                    android:id="@+id/third_title_account"
                     android:layout_height="wrap_content"
                     android:textColor="@color/md_black_1000"
                     android:layout_marginStart="20dp"
@@ -72,7 +75,7 @@
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:textSize="14sp"
-                    android:text="Institut Universitaire de la Cote"/>
+                    android:text="More details"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -108,7 +111,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="reglages"
+                            android:text="Preferences"
                             android:textColor="@color/md_grey_400"
                             android:textAllCaps="true"
                             android:textSize="12sp" />
@@ -145,7 +148,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ajouter un media"
+                            android:text="Add more photos"
                             android:textColor="@color/md_grey_400"
                             android:textAllCaps="true"
                             android:gravity="center"
@@ -179,7 +182,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="modifier vos informations"
+                            android:text="Edit Profile"
                             android:gravity="center"
                             android:textColor="@color/md_grey_400"
                             android:textAllCaps="true"
@@ -246,7 +249,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="mon tinder plus"
+                        android:text="See your investors"
                         android:textSize="16sp"
                         android:textAllCaps="true"
                         android:textColor="@color/colorPrimary" />

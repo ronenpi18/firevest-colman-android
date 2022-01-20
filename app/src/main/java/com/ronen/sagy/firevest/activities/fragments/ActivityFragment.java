@@ -31,10 +31,10 @@ public class ActivityFragment extends Fragment implements View.OnClickListener, 
     private TextView chatText, feedText;
     private LinearLayout chatLayout, feedLayout;
 
-
     public ActivityFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,8 +48,8 @@ public class ActivityFragment extends Fragment implements View.OnClickListener, 
         feedText = rootLayout.findViewById(R.id.text_feed);
 
         ArrayList<Fragment> fragList = new ArrayList<>();
-//        fragList.add(new ChatFragment());
-//        fragList.add(new FeedFragment());
+        fragList.add(new ChatFragment());
+        fragList.add(new FeedFragment());
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(fragList, getActivity().getSupportFragmentManager());
         viewPager = rootLayout.findViewById(R.id.view_pager_frag);
         viewPager.setAdapter(pagerAdapter);
@@ -60,7 +60,6 @@ public class ActivityFragment extends Fragment implements View.OnClickListener, 
 
         return rootLayout;
     }
-
 
 
     @Override
@@ -103,23 +102,4 @@ public class ActivityFragment extends Fragment implements View.OnClickListener, 
     public void onPageScrollStateChanged(int state) {
 
     }
-
-//    public static ActivityFragment newInstance(String param1, String param2) {
-//        ActivityFragment fragment = new ActivityFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//    }
-
 }

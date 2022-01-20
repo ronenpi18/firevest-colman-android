@@ -18,21 +18,21 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ronen.sagy.firevest.R;
 import com.ronen.sagy.firevest.activities.fragments.AccountFragment;
 import com.ronen.sagy.firevest.activities.fragments.ActivityFragment;
+import com.ronen.sagy.firevest.activities.fragments.SwipeFeedFragment;
 import com.ronen.sagy.firevest.adapters.ViewPagerAdapter;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
-    private FirebaseAuth mAuth;
 
     private Context mContext;
     private ViewPager viewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mAuth = FirebaseAuth.getInstance();
 
         mContext = this;
 
@@ -40,21 +40,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         ArrayList<Fragment> fragList = new ArrayList<>();
         fragList.add(new AccountFragment());
-//        fragList.add(new SwipeViewFragment());
+        fragList.add(new SwipeFeedFragment());
         fragList.add(new ActivityFragment());
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(fragList, getSupportFragmentManager());
         viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(3);
         bnv.setOnNavigationItemSelectedListener(this);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
     }
 
     @Override
@@ -66,9 +58,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             case R.id.fire:
                 viewPager.setCurrentItem(1);
                 break;
-//            case R.id.chat:
-//                viewPager.setCurrentItem(2);
-//                break;
+            case R.id.chat:
+                viewPager.setCurrentItem(2);
+                break;
         }
         return true;
     }
