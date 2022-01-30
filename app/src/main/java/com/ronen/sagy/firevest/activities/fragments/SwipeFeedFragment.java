@@ -55,8 +55,6 @@ public class SwipeFeedFragment extends Fragment {
         mSwipeView = view.findViewById(R.id.swipeView);
         fabLike = view.findViewById(R.id.fabLike);
         fabSkip = view.findViewById(R.id.fabSkip);
-
-
         mContext = getActivity();
 
         int bottomMargin = Utils.dpToPx(100);
