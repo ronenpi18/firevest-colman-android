@@ -48,8 +48,12 @@ public class ActivityFragment extends Fragment implements View.OnClickListener, 
         feedText = rootLayout.findViewById(R.id.text_feed);
 
         ArrayList<Fragment> fragList = new ArrayList<>();
-        fragList.add(new ChatFragment());
-        fragList.add(new FeedFragment());
+        fragList.add(new ChatNewFragment(mContext));
+//        viewPagerAdapter.addFragment(new ChatNewFragment(this), "Chats");
+//        viewPagerAdapter.addFragment(new UserFragment(this), "Users");
+//        viewPagerAdapter.addFragment(new ProfileFragment(this), "Profile");
+
+        fragList.add(new UserFragment(mContext));
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(fragList, getActivity().getSupportFragmentManager());
         viewPager = rootLayout.findViewById(R.id.view_pager_frag);
         viewPager.setAdapter(pagerAdapter);
