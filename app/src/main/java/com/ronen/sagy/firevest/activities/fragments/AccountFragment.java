@@ -43,7 +43,7 @@ public class AccountFragment extends Fragment {
 
         sliderView.setSliderAdapter(adapter);
 
-        sliderView.setIndicatorAnimation(IndicatorAnimations.SLIDE); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        sliderView.setIndicatorAnimation(IndicatorAnimations.SLIDE);
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
         sliderView.startAutoCycle();
