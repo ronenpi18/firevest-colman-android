@@ -8,16 +8,21 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import com.ronen.sagy.firevest.R;
 import com.ronen.sagy.firevest.activities.fragments.AccountFragment;
 import com.ronen.sagy.firevest.activities.fragments.ActivityFragment;
+import com.ronen.sagy.firevest.activities.fragments.ProfileFragment;
 import com.ronen.sagy.firevest.activities.fragments.SwipeFeedFragment;
 import com.ronen.sagy.firevest.adapters.ViewPagerAdapter;
 
@@ -34,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.addAuthStateListener(authStateListener);
         mContext = this;
 
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
@@ -48,6 +55,22 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         viewPager.setOffscreenPageLimit(3);
         bnv.setOnNavigationItemSelectedListener(this);
     }
+
+    FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+            if (firebaseUser == null) {
+                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            if (firebaseUser != null) {
+                Toast.makeText(MainActivity.this, "Logged in @ MainActivity:69", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
