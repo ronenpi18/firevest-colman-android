@@ -1,12 +1,18 @@
 package com.ronen.sagy.firevest.activities.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.ronen.sagy.firevest.R;
 import com.ronen.sagy.firevest.adapters.SliderAdapter;
@@ -23,6 +29,10 @@ public class AccountFragment extends Fragment {
 
 
     View rootLayout;
+    TextView titleName;
+    TextView fieldOfProf;
+    ImageButton editProfile;
+
     private SliderView sliderView;
 
     public AccountFragment() {
@@ -47,8 +57,18 @@ public class AccountFragment extends Fragment {
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
         sliderView.startAutoCycle();
-
+        rootLayout.findViewById(R.id.edit_profile_pen).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(AccountFragment.this).navigate(R.id.action_accountFragment_to_profileFragment);
+            }
+        });
         return rootLayout;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
     }
 
 }
