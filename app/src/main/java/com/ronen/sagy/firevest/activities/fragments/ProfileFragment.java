@@ -68,6 +68,9 @@ public class ProfileFragment extends Fragment {
 
         this.context = context;
     }
+    public ProfileFragment() {
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
