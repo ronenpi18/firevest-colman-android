@@ -3,6 +3,7 @@ package com.ronen.sagy.firevest.activities.fragments;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -35,6 +36,11 @@ public class ActivityFragment extends Fragment implements View.OnClickListener, 
         // Required empty public constructor
     }
 
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
