@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/accountFragment">
-
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.ronen.sagy.firevest.activities.fragments.AccountFragment"
@@ -13,7 +13,21 @@
             app:destination="@id/profileFragment" />
     </fragment>
     <fragment
+        android:id="@+id/swipeFeedFragment"
+        android:name="com.ronen.sagy.firevest.activities.fragments.SwipeFeedFragment"
+        android:label="SwipeFeedFragment" />
+    <fragment
+        android:id="@+id/activityFragment"
+        android:name="com.ronen.sagy.firevest.activities.fragments.ActivityFragment"
+        android:label="fragment_activity"
+        tools:layout="@layout/fragment_activity" />
+    <fragment
         android:id="@+id/profileFragment"
         android:name="com.ronen.sagy.firevest.activities.fragments.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.ronen.sagy.firevest.activities.fragments.ChatFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
