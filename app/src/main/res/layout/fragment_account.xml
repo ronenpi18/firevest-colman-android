@@ -47,7 +47,7 @@
 
 
                 <com.ronen.sagy.firevest.custom_widgets.CircleImageView
-                    android:id="@+id/profile_image"
+                    android:id="@+id/profile_image_account"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_gravity="center_horizontal"

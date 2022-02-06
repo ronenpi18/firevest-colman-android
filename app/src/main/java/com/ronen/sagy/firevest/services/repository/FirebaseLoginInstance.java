@@ -1,8 +1,16 @@
 package com.ronen.sagy.firevest.services.repository;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.ronen.sagy.firevest.services.model.AppDatabase;
+import com.ronen.sagy.firevest.FirevestApplication;
+import com.ronen.sagy.firevest.services.model.Users;
 import com.ronen.sagy.firevest.services.notifications.Token;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -15,8 +23,12 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FirebaseLoginInstance {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mAuth.getCurrentUser();
+    private AsyncTask asyncTask;
+    private final AppDatabase database;
 
-
+    public FirebaseLoginInstance() {
+        database = FirevestApplication.getDatabase();
+    }
 
     public MutableLiveData<FirebaseUser> getFirebaseUserLoginStatus() {
         final MutableLiveData<FirebaseUser> firebaseUserLoginStatus = new MutableLiveData<>();
@@ -43,8 +55,6 @@ public class FirebaseLoginInstance {
     }
 
 
-
-
     public MutableLiveData<Task> loginUser(String emailLogin, String pwdLogin) {
         final MutableLiveData<Task> taskLogin = new MutableLiveData<>();
 
@@ -52,10 +62,35 @@ public class FirebaseLoginInstance {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 taskLogin.setValue(task);
+
             }
         });
 
         return taskLogin;
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    public LiveData<Boolean> saveUserLocal(Users article) {
+        MutableLiveData<Boolean> isSuccessLiveData = new MutableLiveData<>();
+        asyncTask = new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                try {
+                    database.userDao().saveUser(article);
+                } catch (Exception e) {
+                    Log.e("test", e.getMessage());
+                    return false;
+                }
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean isSuccess) {
+                article.setStatus(isSuccess.toString());
+                isSuccessLiveData.setValue(isSuccess);
+            }
+        }.execute();
+        return isSuccessLiveData;
     }
 
     public MutableLiveData<Task> resetPassword(String email) {

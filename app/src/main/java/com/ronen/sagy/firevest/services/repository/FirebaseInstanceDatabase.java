@@ -22,15 +22,21 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.ronen.sagy.firevest.FirevestApplication;
+import com.ronen.sagy.firevest.services.model.AppDatabase;
 
 import java.util.HashMap;
 import java.util.Objects;
 
 public class FirebaseInstanceDatabase {
-        private FirebaseDatabase instance = FirebaseDatabase.getInstance();
+    private FirebaseDatabase instance = FirebaseDatabase.getInstance();
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference("uploads");
+    private final AppDatabase database;
 
+    public FirebaseInstanceDatabase() {
+        database = FirevestApplication.getDatabase();
+    }
 
     public MutableLiveData<DataSnapshot> fetchAllUserByNames() {
         final MutableLiveData<DataSnapshot> fetchAllUSerName = new MutableLiveData<>();
@@ -320,7 +326,7 @@ public class FirebaseInstanceDatabase {
 
     public MutableLiveData<Boolean> addStatusInDatabase(String statusUpdated, Object status) {
         final MutableLiveData<Boolean> successAddStatus = new MutableLiveData<>();
-        String id=firebaseUser.getUid();
+        String id = firebaseUser.getUid();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         HashMap<String, Object> map = new HashMap<>();
@@ -329,7 +335,7 @@ public class FirebaseInstanceDatabase {
         ref.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     ref.child(id).updateChildren(map);
                     successAddStatus.setValue(true);
                 } else {
@@ -337,6 +343,7 @@ public class FirebaseInstanceDatabase {
                     successAddStatus.setValue(false);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 successAddStatus.setValue(false);
@@ -358,6 +365,8 @@ public class FirebaseInstanceDatabase {
         hashMap.put("bio", "Hey there!");
         hashMap.put("status", "offline");
         hashMap.put("search", userName.toLowerCase());
+        hashMap.put("investmentStageOrCapital", "userName.toLowerCase()");
+        hashMap.put("typeOfUser", "startup");
 
         instance.getReference("Users").child(userId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

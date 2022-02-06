@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class FirebaseSignUpInstance {
+
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser;
     public MutableLiveData<FirebaseUser> firebaseUsers = new MutableLiveData<>();
