@@ -10,6 +10,9 @@ import androidx.room.Insert;
 import androidx.room.PrimaryKey;
 import androidx.room.Query;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,6 +22,8 @@ public class Users implements Serializable {
     @ColumnInfo(name = "id")
     private String id;
 
+    @SerializedName("username")
+    @Expose
     @ColumnInfo(name = "user_name")
     private String username;
 
@@ -29,10 +34,17 @@ public class Users implements Serializable {
 
     @ColumnInfo(name = "timestamp")
     private String timestamp;
+
+    @Expose
+    @SerializedName("fieldOfWork")
     @ColumnInfo(name = "field_of_work")
     private String fieldOfWork;
+
+    @SerializedName("imageUrl")
+    @Expose
     @ColumnInfo(name = "image_url")
     private String imageUrl;
+
     @ColumnInfo(name = "bio")
     private String bio;
     @ColumnInfo(name = "status")

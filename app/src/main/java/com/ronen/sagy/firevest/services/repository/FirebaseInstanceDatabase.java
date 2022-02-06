@@ -56,6 +56,28 @@ public class FirebaseInstanceDatabase {
         return fetchAllUSerName;
     }
 
+    public MutableLiveData<DataSnapshot> fetchAllStartupsByNames() {
+        final MutableLiveData<DataSnapshot> fetchAllStartUps = new MutableLiveData<>();
+
+        instance.getReference("Users")
+                .orderByChild("username")
+                .orderByValue()
+                .equalTo("startup")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        fetchAllStartUps.setValue(dataSnapshot);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+        return fetchAllStartUps;
+    }
+
 
     private String getFileExtension(Uri uri, Context context) {
         ContentResolver contentResolver = Objects.requireNonNull(context).getContentResolver();
@@ -367,6 +389,7 @@ public class FirebaseInstanceDatabase {
         hashMap.put("search", userName.toLowerCase());
         hashMap.put("investmentStageOrCapital", "userName.toLowerCase()");
         hashMap.put("typeOfUser", "startup");
+        hashMap.put("fieldOfWork", "cyber");
 
         instance.getReference("Users").child(userId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

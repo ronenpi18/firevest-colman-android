@@ -19,6 +19,7 @@ public class DatabaseViewModel extends ViewModel {
     public LiveData<Boolean> successAddUserDb;
     public LiveData<DataSnapshot> fetchUserCurrentData;
     public LiveData<DataSnapshot> fetchUserNames;
+    public LiveData<DataSnapshot> fetchStartUps;
     public LiveData<DataSnapshot> fetchSelectedProfileUserData;
     public LiveData<Boolean> successAddChatDb;
     public LiveData<DataSnapshot> fetchedChat;
@@ -48,6 +49,9 @@ public class DatabaseViewModel extends ViewModel {
 
     public void fetchUserByNameAll() {
         fetchUserNames = instance.fetchAllUserByNames();
+    }
+    public void fetchAllStartUps() {
+        fetchStartUps = instance.fetchAllStartupsByNames();
     }
 
     public void fetchSelectedUserProfileData(String userId) {

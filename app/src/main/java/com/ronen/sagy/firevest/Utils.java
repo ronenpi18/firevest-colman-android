@@ -9,11 +9,18 @@ import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
 
+import androidx.lifecycle.Observer;
+
+import com.google.firebase.database.DataSnapshot;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ronen.sagy.firevest.adapters.UserFragmentAdapter;
 import com.ronen.sagy.firevest.entities.Profile;
+import com.ronen.sagy.firevest.services.model.ChatList;
+import com.ronen.sagy.firevest.services.model.Users;
 import com.ronen.sagy.firevest.viewModel.DatabaseViewModel;
 
 import org.json.JSONArray;
@@ -27,22 +34,26 @@ public class Utils {
 
     private static final String TAG = "Utils";
 
-    public static List<Profile> loadProfiles(Context context) {
-        try {
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
-            JSONArray array = new JSONArray(loadJSONFromAsset(context, "profiles.json"));
-            List<Profile> profileList = new ArrayList<>();
-            for (int i = 0; i < array.length(); i++) {
-                Profile profile = gson.fromJson(array.getString(i), Profile.class);
-                profileList.add(profile);
-            }
-            return profileList;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    public static List<Users> loadProfiles(Context context) {
+//        try {
+//            GsonBuilder builder = new GsonBuilder();
+//            Gson gson = builder.create();
+////            JSONArray array = new JSONArray(loadJSONFromAsset(context, "profiles.json"));
+////            List<Users> profileList = new ArrayList<>();
+////            for (int i = 0; i < array.length(); i++) {
+////                Users profile = gson.fromJson(array.getString(i), Users.class);
+////                profileList.add(profile);
+////            }
+//            startUpsLists()
+//            return profileList;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+
+
+
 
     private static String loadJSONFromAsset(Context context, String jsonFileName) {
         String json;

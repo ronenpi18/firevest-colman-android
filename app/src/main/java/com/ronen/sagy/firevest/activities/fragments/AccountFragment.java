@@ -90,11 +90,17 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         rootLayout = inflater.inflate(R.layout.fragment_account, container, false);
         init(rootLayout);
-        fetchCurrentUserdata();
 
         sliderView = rootLayout.findViewById(R.id.slider_view);
 
         final SliderAdapter adapter = new SliderAdapter(getActivity());
+        try {
+
+            fetchCurrentUserdata();
+        } catch (Exception e) {
+            NavHostFragment.findNavController(AccountFragment.this).navigate(R.id.loginActivity);
+
+        }
 
         sliderView.setSliderAdapter(adapter);
 
@@ -122,15 +128,15 @@ public class AccountFragment extends Fragment {
 
         titleName = view.findViewById(R.id.First_title_account);
         btn_profile_image_change = view.findViewById(R.id.profile_image_account);
-        UserDao userDao = db.userDao();
-        List<Users> user = userDao.getAll();
-        if (!user.isEmpty()) {
-            if (user.get(0).getInvestmentStageOrCapital() != null) {
-                titleName.setText(String.format("%s, %s", user.get(0).getUsername(), user.get(0).getInvestmentStageOrCapital()));
-            } else {
-                titleName.setText(user.get(0).getUsername());
-            }
-        }
+//        UserDao userDao = db.userDao();
+//        List<Users> user = userDao.getAll();
+//        if (!user.isEmpty()) {
+//            if (user.get(0).getInvestmentStageOrCapital() != null) {
+//                titleName.setText(String.format("%s, %s", user.get(0).getUsername(), user.get(0).getInvestmentStageOrCapital()));
+//            } else {
+//                titleName.setText(user.get(0).getUsername());
+//            }
+//        }
 
         btn_profile_image_change.setOnClickListener(new View.OnClickListener() {
             @Override

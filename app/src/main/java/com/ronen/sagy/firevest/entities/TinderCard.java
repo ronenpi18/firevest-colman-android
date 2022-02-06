@@ -16,6 +16,7 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeInState;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
 import com.ronen.sagy.firevest.R;
+import com.ronen.sagy.firevest.services.model.Users;
 
 
 @Layout(R.layout.adapter_tinder_card)
@@ -30,11 +31,11 @@ public class TinderCard {
     @View(R.id.locationNameTxt)
     private TextView locationNameTxt;
 
-    private Profile mProfile;
+    private Users mProfile;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
 
-    public TinderCard(Context context, Profile profile, SwipePlaceHolderView swipeView) {
+    public TinderCard(Context context, Users profile, SwipePlaceHolderView swipeView) {
         mContext = context;
         mProfile = profile;
         mSwipeView = swipeView;
@@ -43,8 +44,8 @@ public class TinderCard {
     @Resolve
     private void onResolved(){
         Glide.with(mContext).load(mProfile.getImageUrl()).into(profileImageView);
-        nameAgeTxt.setText(mProfile.getName() + ", " + mProfile.getAge());
-        locationNameTxt.setText(mProfile.getLocation());
+        nameAgeTxt.setText(mProfile.getUsername() + ", " + mProfile.getInvestmentStageOrCapital());
+        locationNameTxt.setText(mProfile.getFieldOfWork());
     }
 
     @SwipeOut

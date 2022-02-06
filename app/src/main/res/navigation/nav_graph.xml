@@ -38,4 +38,9 @@
         android:name="com.ronen.sagy.firevest.activities.SetupProfileActivity"
         android:label="activity_setup_profile"
         tools:layout="@layout/activity_setup_profile" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.ronen.sagy.firevest.activities.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>

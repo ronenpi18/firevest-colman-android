@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 finish();
             }
             if (firebaseUser != null) {
-                Toast.makeText(MainActivity.this, "Logged in @ MainActivity:69", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Logged in @ MainActivity", Toast.LENGTH_SHORT).show();
             }
         }
     };
