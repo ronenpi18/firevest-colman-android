@@ -5,8 +5,10 @@ package com.ronen.sagy.firevest.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
@@ -27,14 +29,19 @@ import com.ronen.sagy.firevest.activities.fragments.ActivityFragment;
 import com.ronen.sagy.firevest.activities.fragments.ProfileFragment;
 import com.ronen.sagy.firevest.activities.fragments.SwipeFeedFragment;
 import com.ronen.sagy.firevest.adapters.ViewPagerAdapter;
+import com.ronen.sagy.firevest.services.model.AppDatabase;
+import com.ronen.sagy.firevest.services.model.UserDao;
+import com.ronen.sagy.firevest.services.model.Users;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
     private Context mContext;
     private ViewPager viewPager;
     NavHostFragment navHostFragment;
+    AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.addAuthStateListener(authStateListener);
         mContext = this;
+        db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "database-name").build();
 
         BottomNavigationView navView = findViewById(R.id.bottom_navigation);
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
@@ -97,5 +106,11 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
     }
 }
