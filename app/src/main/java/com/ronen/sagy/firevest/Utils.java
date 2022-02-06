@@ -1,6 +1,8 @@
 package com.ronen.sagy.firevest;
 
+
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -12,6 +14,7 @@ import android.view.WindowManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ronen.sagy.firevest.entities.Profile;
+import com.ronen.sagy.firevest.viewModel.DatabaseViewModel;
 
 import org.json.JSONArray;
 
@@ -70,6 +73,10 @@ public class Utils {
             e.printStackTrace();
             return new Point(0, 0);
         }
+    }
+
+    public interface OnItemCreated {
+        void itemCreated(String title);
     }
 
     public static int dpToPx(int dp) {

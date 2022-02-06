@@ -4,7 +4,6 @@
     <color name="colorPrimaryDark">@color/md_pink_800</color>
     <color name="colorAccent">@color/md_orange_A400</color>
 
-    <color name="white">#ffffff</color>
     <color name="light_gray">#ABABAB</color>
     <color name="darkBlue">#405467</color>
 
@@ -316,5 +315,15 @@
     <color name="md_blue_grey_700">#455A64</color>
     <color name="md_blue_grey_800">#37474F</color>
     <color name="md_blue_grey_900">#263238</color>
+
+    <color name="colorBackground">@color/md_red_300</color>
+    <color name="separatorColor">#18102C</color>
+    <color name="pink">#FF308E</color>
+    <color name="orange">#FA9301</color>
+    <color name="yellow">#F8D411</color>
+    <color name="blue">#20CBF3</color>
+    <color name="purple">#6F26FA</color>
+    <color name="green">#49CC56</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>

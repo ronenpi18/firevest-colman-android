@@ -135,7 +135,8 @@ public class SignupActivity extends AppCompatActivity {
                 } else {
                     getUserSession();
                     addUserInDatabase(userName, emailId, userId);
-                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+
+                    Intent intent = new Intent(SignupActivity.this, SetupProfileActivity.class);
                     startActivity(intent);
                     finish();
                 }
