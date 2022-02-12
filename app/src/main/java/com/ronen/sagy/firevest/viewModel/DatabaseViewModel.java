@@ -5,10 +5,8 @@ import android.net.Uri;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.room.Room;
 
 import com.ronen.sagy.firevest.services.model.AppDatabase;
-import com.ronen.sagy.firevest.services.model.UserDao;
 import com.ronen.sagy.firevest.services.repository.FirebaseInstanceDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
