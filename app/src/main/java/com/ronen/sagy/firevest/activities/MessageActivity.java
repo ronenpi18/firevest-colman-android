@@ -260,24 +260,7 @@ public class MessageActivity extends AppCompatActivity {
 
                             assert token != null;
                             Sender sender = new Sender(data, token.getToken());
-
-//                            apiService.sendNotification(sender)
-//                                    .enqueue(new Callback<MyResponse>() {
-//                                        @Override
-//                                        public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-//                                            if (response.code() == 200) {
-//                                                assert response.body() != null;
-//                                                if (response.body().success != 1) {
-//
-//                                                }
-//                                            }
-//                                        }
-//
-//                                        @Override
-//                                        public void onFailure(Call<MyResponse> call, Throwable t) {
-//
-//                                        }
-//                                    });
+                            // todo notify receiver
 
                         }
                     }
@@ -300,6 +283,7 @@ public class MessageActivity extends AppCompatActivity {
         context = MessageActivity.this;
 
 //        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+        // todo notify receiver
 
         iv_user_status_message_view = findViewById(R.id.iv_user_status_message_view);
         iv_profile_image = findViewById(R.id.iv_user_image);

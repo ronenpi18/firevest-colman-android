@@ -61,8 +61,9 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
+            android:paddingLeft="10dp"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
+            android:textColor="@color/darkGray"
             android:textSize="17sp"
             android:textStyle="bold" />
 

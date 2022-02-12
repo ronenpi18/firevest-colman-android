@@ -11,12 +11,14 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.ronen.sagy.firevest.R;
+import com.ronen.sagy.firevest.services.model.AppDatabase;
 import com.ronen.sagy.firevest.viewModel.DatabaseViewModel;
 import com.ronen.sagy.firevest.viewModel.SignInViewModel;
 import com.google.android.gms.tasks.Task;
@@ -44,7 +46,9 @@ public class SignupActivity extends AppCompatActivity {
     String imageUrl;
     String timeStamp;
     FirebaseUser currentUser;
+    ToggleButton userType;
     FrameLayout progressBarSignInFrame;
+    private AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +160,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean)
                     Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+
                 else {
                     Toast.makeText(context, "ERROR WHILE ADDING DATA IN DATABASE.", Toast.LENGTH_SHORT).show();
                 }
@@ -187,6 +192,8 @@ public class SignupActivity extends AppCompatActivity {
         et_pwdSignIn = findViewById(R.id.et_signin_password);
         btn_signIn = findViewById(R.id.btn_signin);
         textToLogin = findViewById(R.id.text_to_login);
+        userType = findViewById(R.id.toggle_user_type);
+
         context = SignupActivity.this;
         signInViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getApplication()))
