@@ -21,7 +21,6 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,7 +38,6 @@ import com.google.firebase.storage.UploadTask;
 import com.ronen.sagy.firevest.R;
 import com.ronen.sagy.firevest.adapters.SliderAdapter;
 import com.ronen.sagy.firevest.services.model.AppDatabase;
-import com.ronen.sagy.firevest.services.model.UserDao;
 import com.ronen.sagy.firevest.services.model.Users;
 import com.ronen.sagy.firevest.viewModel.DatabaseViewModel;
 import com.smarteist.autoimageslider.IndicatorAnimations;
@@ -48,7 +46,6 @@ import com.smarteist.autoimageslider.SliderView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 
 /**

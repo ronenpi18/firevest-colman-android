@@ -1,57 +1,36 @@
 package com.ronen.sagy.firevest.services.model;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Dao;
-import androidx.room.Database;
-import androidx.room.Delete;
-import androidx.room.Entity;
-import androidx.room.Insert;
-import androidx.room.PrimaryKey;
-import androidx.room.Query;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
-@Entity
 public class Users implements Serializable {
 
-    @ColumnInfo(name = "id")
     private String id;
 
     @SerializedName("username")
     @Expose
-    @ColumnInfo(name = "user_name")
     private String username;
 
-    @PrimaryKey
-    @ColumnInfo(name = "email_id")
     @NonNull
     private String emailId;
 
-    @ColumnInfo(name = "timestamp")
     private String timestamp;
 
     @Expose
     @SerializedName("fieldOfWork")
-    @ColumnInfo(name = "field_of_work")
     private String fieldOfWork;
 
     @SerializedName("imageUrl")
     @Expose
-    @ColumnInfo(name = "image_url")
     private String imageUrl;
 
-    @ColumnInfo(name = "bio")
     private String bio;
-    @ColumnInfo(name = "status")
     private String status;
-    @ColumnInfo(name = "type_of_user")
     private String typeOfUser;
-    @ColumnInfo(name = "investment_stage_or_capital")
     private String investmentStageOrCapital;
 
 

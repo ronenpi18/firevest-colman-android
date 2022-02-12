@@ -60,6 +60,30 @@
 
 
     </LinearLayout>
+    <ImageView
+        android:layout_width="150dp"
+        android:id="@+id/imgCentered"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo_firevest"/>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:id="@+id/imgAnim1"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo_firevest"/>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:id="@+id/imgAnim2"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo_firevest"/>
+
 
     <com.mindorks.placeholderview.SwipePlaceHolderView
         android:id="@+id/swipeView"
