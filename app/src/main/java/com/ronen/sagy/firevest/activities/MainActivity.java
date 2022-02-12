@@ -4,8 +4,6 @@ package com.ronen.sagy.firevest.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
@@ -24,17 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.ronen.sagy.firevest.R;
-import com.ronen.sagy.firevest.activities.fragments.AccountFragment;
-import com.ronen.sagy.firevest.activities.fragments.ActivityFragment;
-import com.ronen.sagy.firevest.activities.fragments.ProfileFragment;
-import com.ronen.sagy.firevest.activities.fragments.SwipeFeedFragment;
-import com.ronen.sagy.firevest.adapters.ViewPagerAdapter;
 import com.ronen.sagy.firevest.services.model.AppDatabase;
-import com.ronen.sagy.firevest.services.model.UserDao;
-import com.ronen.sagy.firevest.services.model.Users;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
