@@ -16,6 +16,7 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeInState;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
 import com.ronen.sagy.firevest.R;
+import com.ronen.sagy.firevest.services.model.AppDatabase;
 import com.ronen.sagy.firevest.services.model.Users;
 
 
@@ -30,6 +31,7 @@ public class TinderCard {
 
     @View(R.id.locationNameTxt)
     private TextView locationNameTxt;
+    private AppDatabase database;
 
     private Users mProfile;
     private Context mContext;
@@ -39,6 +41,8 @@ public class TinderCard {
         mContext = context;
         mProfile = profile;
         mSwipeView = swipeView;
+        database = AppDatabase.getInstance(mContext);
+
     }
 
     @Resolve
@@ -67,10 +71,15 @@ public class TinderCard {
     @SwipeInState
     private void onSwipeInState(){
         Log.d("EVENT", "onSwipeInState");
+//        database.swipedDao().insertAll(mProfile.getEmailId(),
+//                mProfile.getId(), mProfile.getUsername(), "Hey, I would like to invest!");
     }
 
     @SwipeOutState
     private void onSwipeOutState(){
         Log.d("EVENT", "onSwipeOutState");
+
+        database.swipedDao().insertAll(mProfile.getEmailId(),
+                mProfile.getId(), mProfile.getUsername(), "");
     }
 }
