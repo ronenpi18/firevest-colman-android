@@ -102,8 +102,6 @@ public class ChatNewFragment extends Fragment {
                 chatLists();
             }
         });
-
-
     }
 
     private void chatLists() {
