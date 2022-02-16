@@ -2,33 +2,16 @@ package com.ronen.sagy.firevest;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
-import android.view.View;
 import android.view.WindowManager;
-
-import androidx.lifecycle.Observer;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.ronen.sagy.firevest.adapters.UserFragmentAdapter;
-import com.ronen.sagy.firevest.entities.Profile;
-import com.ronen.sagy.firevest.services.model.ChatList;
-import com.ronen.sagy.firevest.services.model.Users;
-import com.ronen.sagy.firevest.viewModel.DatabaseViewModel;
-
-import org.json.JSONArray;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Utils {
 

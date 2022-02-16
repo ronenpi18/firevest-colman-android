@@ -5,8 +5,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.ronen.sagy.firevest.services.model.Users;
-
 @Entity
 public class SwipedList {
     @PrimaryKey
