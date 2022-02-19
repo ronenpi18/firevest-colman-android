@@ -375,7 +375,9 @@ public class FirebaseInstanceDatabase {
     }
 
 
-    public MutableLiveData<Boolean> addUserInDatabase(String userId, String userName, String emailId, String timestamp, String imageUrl, String typeOfUser) {
+    public MutableLiveData<Boolean> addUserInDatabase(String userId, String userName, String emailId,
+                                                      String timestamp, String imageUrl, String typeOfUser,
+                                                      String fieldOfWork, String shortBio, String investmentStage) {
         final MutableLiveData<Boolean> successAddUserDb = new MutableLiveData<>();
 
         HashMap<String, String> hashMap = new HashMap<>();
@@ -384,12 +386,12 @@ public class FirebaseInstanceDatabase {
         hashMap.put("emailId", emailId);
         hashMap.put("timestamp", timestamp);
         hashMap.put("imageUrl", imageUrl);
-        hashMap.put("bio", "Hey there!");
+        hashMap.put("bio", shortBio);
         hashMap.put("status", "offline");
         hashMap.put("search", userName.toLowerCase());
-        hashMap.put("investmentStageOrCapital", "userName.toLowerCase()");
+        hashMap.put("investmentStageOrCapital", investmentStage);
         hashMap.put("typeOfUser", typeOfUser);
-        hashMap.put("fieldOfWork", "cyber");
+        hashMap.put("fieldOfWork", fieldOfWork);
 
         instance.getReference("Users").child(userId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

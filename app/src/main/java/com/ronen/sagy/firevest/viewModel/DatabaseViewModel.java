@@ -37,8 +37,10 @@ public class DatabaseViewModel extends ViewModel {
         instance = new FirebaseInstanceDatabase();
     }
 
-    public void addUserDatabase(String userId, String userName, String emailId, String timestamp, String imageUrl, String typeOfUser) {
-        successAddUserDb = instance.addUserInDatabase(userId, userName, emailId, timestamp, imageUrl, typeOfUser);
+    public void addUserDatabase(String userId, String userName, String emailId, String timestamp,
+                                String imageUrl, String typeOfUser, String fieldOfWork, String shortBio,
+                                String investmentStage) {
+        successAddUserDb = instance.addUserInDatabase(userId, userName, emailId, timestamp, imageUrl, typeOfUser, fieldOfWork, shortBio, investmentStage);
     }
 
     public void fetchingUserDataCurrent() {
