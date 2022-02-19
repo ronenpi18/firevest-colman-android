@@ -1,28 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ronen.sagy.firevest.custom_widgets.BounceScrollView
+<com.ronen.sagy.firevest.custom_widgets.BounceScrollView xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--    <androidx.fragment.app.FragmentContainerView-->
-<!--        android:id="@+id/nav_host_fragment"-->
-<!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-
-<!--        app:defaultNavHost="true"-->
-<!--        app:navGraph="@navigation/nav_graph" />-->
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="#f6F7FB"
         tools:context=".fragments.AccountFragment"
         android:orientation="vertical"
@@ -63,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:id="@+id/First_title_account"
                     android:layout_height="wrap_content"
-                    android:text="500 Startups, Investor"
+                    android:text="loading..."
                     android:textColor="@color/md_black_1000"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -74,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/second_title_account"
-                    android:text="Cyber Security"
+                    android:text=""
                     android:textColor="@color/md_black_1000"
                     android:textSize="14sp"
                     android:layout_gravity="center"/>
@@ -85,75 +70,75 @@
                     android:layout_margin="20dp">
 
 
+                    <!--                    <LinearLayout-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentBottom="true"-->
+<!--                        android:layout_centerInParent="true"-->
+<!--                        android:gravity="center"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="60dp"-->
+<!--                            android:layout_height="60dp"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            android:background="@drawable/circle_pink_bg"-->
+<!--                            android:clickable="true"-->
+<!--                            android:elevation="2dp"-->
+<!--                            android:focusable="true"-->
+<!--                            android:foreground="?android:attr/selectableItemBackground"-->
+<!--                            android:gravity="center">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="40dp"-->
+<!--                                android:layout_height="40dp"-->
+<!--                                android:src="@drawable/ic_add_a_photo_white_24dp" />-->
+<!--                        </LinearLayout>-->
+
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="Add more photos"-->
+<!--                            android:textAllCaps="true"-->
+<!--                            android:textColor="@color/md_grey_400"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                    </LinearLayout>-->
+
                     <LinearLayout
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:layout_marginStart="51dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
 
                         <LinearLayout
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:gravity="center"
-                            android:elevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
+                            android:layout_marginBottom="5dp"
                             android:background="@drawable/circle_gray_selector"
-                            android:layout_marginBottom="5dp">
+                            android:clickable="true"
+                            android:elevation="2dp"
+                            android:focusable="true"
+                            android:gravity="center">
+
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:src="@drawable/ic_settings_gray_24dp"/>
+                                android:src="@drawable/ic_settings_gray_24dp" />
                         </LinearLayout>
-
 
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Preferences"
-                            android:textColor="@color/md_grey_400"
                             android:textAllCaps="true"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-
-
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_alignParentBottom="true"
-                        android:orientation="vertical"
-                        android:gravity="center">
-                        <LinearLayout
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:gravity="center"
-                            android:elevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            android:background="@drawable/circle_pink_bg"
-                            android:layout_marginBottom="5dp">
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@drawable/ic_add_a_photo_white_24dp"/>
-                        </LinearLayout>
-
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Add more photos"
                             android:textColor="@color/md_grey_400"
-                            android:textAllCaps="true"
-                            android:gravity="center"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -162,34 +147,36 @@
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:layout_marginEnd="72dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:gravity="center"
-                            android:elevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
+                            android:layout_marginBottom="5dp"
                             android:background="@drawable/circle_gray_selector"
-                            android:layout_marginBottom="5dp">
+                            android:clickable="true"
+                            android:elevation="2dp"
+                            android:focusable="true"
+                            android:gravity="center">
+
                             <ImageButton
+                                android:id="@+id/edit_profile_pen"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:id="@+id/edit_profile_pen"
-                                android:src="@drawable/ic_edit_gray_24dp"/>
+                                android:src="@drawable/ic_edit_gray_24dp" />
                         </LinearLayout>
-
 
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Edit Profile"
                             android:gravity="center"
-                            android:textColor="@color/md_grey_400"
-                            android:textAllCaps="true"
                             android:maxLines="2"
+                            android:text="Edit Profile"
+                            android:textAllCaps="true"
+                            android:textColor="@color/md_grey_400"
                             android:textSize="12sp" />
 
                     </LinearLayout>
