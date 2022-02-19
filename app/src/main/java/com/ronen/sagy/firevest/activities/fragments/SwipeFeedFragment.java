@@ -77,7 +77,7 @@ public class SwipeFeedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootLayout = inflater.inflate(R.layout.fragment_swipe_feed, container, false);
-        databaseViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
+        databaseViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
                 .getInstance(Objects.requireNonNull(getActivity()).getApplication()))
                 .get(DatabaseViewModel.class);
 
@@ -173,8 +173,8 @@ public class SwipeFeedFragment extends Fragment {
 
     private boolean hasInLocal(Users user) {
         //todo add get
-        for (SwipedList swipedList : list) {
-            if (swipedList.uidEmail.equals(user.getEmailId()))
+        for (SwipedList swipedListItem : list) {
+            if (swipedListItem.uidEmail.equals(user.getEmailId()))
                 return true;
         }
         return false;
@@ -202,7 +202,7 @@ public class SwipeFeedFragment extends Fragment {
                     assert user != null;
                     if (!(user.getEmailId() == null)
                     ) {
-                        if (!currentUserId.equals(user.getId()) && !hasInLocal(user)) {
+                        if (!currentUserId.equals(user.getId()) && !hasInLocal(user) && !user.getTypeOfUser().toLowerCase().equals("investor")) {
                             mUSer.add(user);
                         }
                     }
