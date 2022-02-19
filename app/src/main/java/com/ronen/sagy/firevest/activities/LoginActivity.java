@@ -34,8 +34,6 @@ public class LoginActivity extends AppCompatActivity {
     String pwdLog;
     TextView textToSignUp;
     FirebaseUser currentUser;
-//    FrameLayout frameLayoutLogin;
-//    ScrollView scrollViewLogin;
     TextView tv_forgetPassword;
 
     @Override
@@ -52,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         logInViewModel.firebaseUserLoginStatus.observe(this, firebaseUser -> {
             currentUser = firebaseUser;
             if (currentUser != null) {
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -82,12 +80,10 @@ public class LoginActivity extends AppCompatActivity {
                 et_pwdLogIn.setError("Please enter your password.");
                 et_pwdLogIn.requestFocus();
             } else {
-//                scrollViewLogin.setClickable(false);
                 et_emailIdLogIn.setClickable(false);
                 et_pwdLogIn.setClickable(false);
                 et_emailIdLogIn.setClickable(false);
                 textToSignUp.setClickable(false);
-//                frameLayoutLogin.setVisibility(View.VISIBLE);
                 logInUser();
             }
 
@@ -106,8 +102,6 @@ public class LoginActivity extends AppCompatActivity {
         logInViewModel.userLogIn(emailLog, pwdLog);
         logInViewModel.logInUser.observe(this, task -> {
             if (!task.isSuccessful()) {
-//                frameLayoutLogin.setVisibility(View.GONE);
-//                scrollViewLogin.setClickable(true);
                 et_emailIdLogIn.setClickable(true);
                 et_pwdLogIn.setClickable(true);
                 et_emailIdLogIn.setClickable(true);
@@ -128,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
             } else {
 
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -148,11 +142,9 @@ public class LoginActivity extends AppCompatActivity {
         et_pwdLogIn = findViewById(R.id.et_login_password);
         textToSignUp = findViewById(R.id.text_to_signUp);
         btn_logIn = findViewById(R.id.btn_login);
-        logInViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
+        logInViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getApplication()))
                 .get(LogInViewModel.class);
-//        frameLayoutLogin = findViewById(R.id.frame_layout_login);
-//        scrollViewLogin  = findViewById(R.id.scrollViewSignIn);
         tv_forgetPassword = findViewById(R.id.tv_forget_password);
 
         tv_forgetPassword.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, ForgetPasswordActivity.class)));

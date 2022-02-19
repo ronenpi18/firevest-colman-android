@@ -43,21 +43,15 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 AppDatabase.class, "database-name").build();
 
         BottomNavigationView navView = findViewById(R.id.bottom_navigation);
+//        BottomNavigationView navViewStartups = findViewById(R.id.bottom_navigation_startups);
+
+
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
         if (navHostFragment != null) {
             NavigationUI.setupWithNavController(navView, navHostFragment.getNavController());
             navView.setOnNavigationItemSelectedListener(this);
         }
 
-//        ArrayList<Fragment> fragList = new ArrayList<>();
-//        fragList.add(new AccountFragment());
-//        fragList.add(new SwipeFeedFragment());
-//        fragList.add(new ActivityFragment());
-//        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(fragList, getSupportFragmentManager());
-//        viewPager = findViewById(R.id.view_pager);
-//        viewPager.setAdapter(pagerAdapter);
-//        viewPager.setOffscreenPageLimit(3);
-//        bnv.setOnNavigationItemSelectedListener(this);
     }
 
     FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -71,7 +65,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 finish();
             }
             if (firebaseUser != null) {
-                Toast.makeText(MainActivity.this, "Logged in @ MainActivity", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "Logged in @ MainActivity", Toast.LENGTH_SHORT).show();
+
             }
         }
     };
