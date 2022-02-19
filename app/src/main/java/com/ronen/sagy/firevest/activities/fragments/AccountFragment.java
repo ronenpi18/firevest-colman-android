@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,6 +22,8 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +39,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.ronen.sagy.firevest.R;
+import com.ronen.sagy.firevest.activities.SignupActivity;
 import com.ronen.sagy.firevest.adapters.SliderAdapter;
 import com.ronen.sagy.firevest.services.model.AppDatabase;
 import com.ronen.sagy.firevest.services.model.Users;
@@ -60,7 +64,7 @@ public class AccountFragment extends Fragment {
     DatabaseViewModel databaseViewModel;
     View rootLayout;
     TextView titleName;
-    TextView fieldOfProf;
+    TextView fieldOfWork;
     ImageButton editProfile;
     ImageView btn_profile_image_change;
     private Uri imageUri;
@@ -92,7 +96,6 @@ public class AccountFragment extends Fragment {
 
         final SliderAdapter adapter = new SliderAdapter(getActivity());
         try {
-
             fetchCurrentUserdata();
         } catch (Exception e) {
             NavHostFragment.findNavController(AccountFragment.this).navigate(R.id.loginActivity);
@@ -124,6 +127,7 @@ public class AccountFragment extends Fragment {
                 .get(DatabaseViewModel.class);
 
         titleName = view.findViewById(R.id.First_title_account);
+        fieldOfWork = view.findViewById(R.id.second_title_account);
         btn_profile_image_change = view.findViewById(R.id.profile_image_account);
 //        UserDao userDao = db.userDao();
 //        List<Users> user = userDao.getAll();
@@ -152,7 +156,7 @@ public class AccountFragment extends Fragment {
 
     private void fetchCurrentUserdata() {
         databaseViewModel.fetchingUserDataCurrent();
-        databaseViewModel.fetchUserCurrentData.observe(this, new Observer<DataSnapshot>() {
+        databaseViewModel.fetchUserCurrentData.observe(this.getViewLifecycleOwner(), new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
                 Users user = dataSnapshot.getValue(Users.class);
@@ -165,6 +169,8 @@ public class AccountFragment extends Fragment {
                     } else {
                         titleName.setText(user.getUsername());
                     }
+                    fieldOfWork.setText(user.getFieldOfWork());
+
 //                    tv_profile_fragment_bio.setText(userBio);
                     if (imageUrl.equals("default")) {
                         btn_profile_image_change.setImageResource(R.drawable.sample_img);
