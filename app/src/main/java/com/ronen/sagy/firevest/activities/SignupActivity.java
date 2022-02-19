@@ -36,6 +36,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText et_pwdSignIn;
     Button btn_signIn;
     TextView textToLogin;
+    TextView personalData;
     SignInViewModel signInViewModel;
     DatabaseViewModel databaseViewModel;
     String emailId;
@@ -59,7 +60,12 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void listeners() {
+        personalData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
         btn_signIn.setOnClickListener(new View.OnClickListener() {
             final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
 
@@ -140,7 +146,7 @@ public class SignupActivity extends AppCompatActivity {
                     getUserSession();
                     addUserInDatabase(userName, emailId, userId);
 
-                    Intent intent = new Intent(SignupActivity.this, SetupProfileActivity.class);
+                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -154,7 +160,8 @@ public class SignupActivity extends AppCompatActivity {
         timeStamp = Long.toString(tsLong);
         imageUrl = "default";
         userId = currentUser.getUid();
-        databaseViewModel.addUserDatabase(userId, userName, email, timeStamp, imageUrl);
+        String userTypeString = userType.getText().toString();
+        databaseViewModel.addUserDatabase(userId, userName, email, timeStamp, imageUrl, userTypeString);
         databaseViewModel.successAddUserDb.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -193,12 +200,13 @@ public class SignupActivity extends AppCompatActivity {
         btn_signIn = findViewById(R.id.btn_signin);
         textToLogin = findViewById(R.id.text_to_login);
         userType = findViewById(R.id.toggle_user_type);
+        personalData = findViewById(R.id.personal_data);
 
         context = SignupActivity.this;
-        signInViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
+        signInViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getApplication()))
                 .get(SignInViewModel.class);
-        databaseViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
+        databaseViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getApplication()))
                 .get(DatabaseViewModel.class);
         progressBarSignInFrame = findViewById(R.id.progress_bar_signIn);

@@ -130,10 +130,10 @@
         android:id="@+id/toggle_user_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:textOn="Startup"
         android:textOff="Investor"
+        android:textOn="Startup"
         app:layout_constraintBottom_toTopOf="@+id/tilUsername"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvExcited"
         app:layout_constraintVertical_bias="0.529" />
@@ -182,5 +182,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvHaveAnAccount"
         app:layout_constraintTop_toTopOf="@+id/tvHaveAnAccount" />
+
+    <TextView
+        android:id="@+id/personal_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:text="Fill your personal data here!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
