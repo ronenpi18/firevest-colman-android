@@ -27,17 +27,6 @@ public class SetupProfileActivity extends AppCompatActivity {
 
     private void createItems() {
         addItem("About You", new String[]{"General", "Boat", "Candy", "Collection", "Sport", "Ball", "Head"}, R.color.pink, R.drawable.account_circle);
-
-
-        addItem("John", new String[]{"House", "Boat", "Candy", "Collection", "Sport", "Ball", "Head"}, R.color.pink, R.drawable.ic_ghost);
-        addItem("Mary", new String[]{"Dog", "Horse", "Boat"}, R.color.blue, R.drawable.ic_ghost);
-        addItem("Ana", new String[]{"Cat"}, R.color.purple, R.drawable.ic_ghost);
-        addItem("Peter", new String[]{"Parrot", "Elephant", "Coffee"}, R.color.yellow, R.drawable.ic_ghost);
-        addItem("Joseph", new String[]{}, R.color.orange, R.drawable.ic_ghost);
-        addItem("Paul", new String[]{"Golf", "Football"}, R.color.green, R.drawable.ic_ghost);
-        addItem("Larry", new String[]{"Ferrari", "Mazda", "Honda", "Toyota", "Fiat"}, R.color.blue, R.drawable.ic_ghost);
-        addItem("Moe", new String[]{"Beans", "Rice", "Meat"}, R.color.yellow, R.drawable.ic_ghost);
-        addItem("Bart", new String[]{"Hamburger", "Ice cream", "Candy"}, R.color.purple, R.drawable.ic_ghost);
     }
 
     private void addItem(String title, String[] subItems, int colorRes, int iconRes) {

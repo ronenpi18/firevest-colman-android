@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -40,7 +41,14 @@ public class SignupActivity extends AppCompatActivity {
     SignInViewModel signInViewModel;
     DatabaseViewModel databaseViewModel;
     String emailId;
+    String fieldOfWork;
+    String invOrCap;
+    String shortBio;
+
     String pwd;
+    EditText txt_invRound;
+    EditText txt_field_of_work;
+    EditText txt_shortbio;
     String userName;
     Context context;
     String userId;
@@ -63,7 +71,7 @@ public class SignupActivity extends AppCompatActivity {
         personalData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                openDialog();
             }
         });
         btn_signIn.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +119,35 @@ public class SignupActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public void openDialog() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(SignupActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.custom_dialog_form, null);
+        Button btn_okay = (Button) mView.findViewById(R.id.btn_okay);
+
+        txt_invRound = (EditText) mView.findViewById(R.id.inv_round);
+        txt_field_of_work = (EditText) mView.findViewById(R.id.field_of_work);
+        txt_shortbio = (EditText) mView.findViewById(R.id.shortbio);
+
+        alert.setView(mView);
+        final AlertDialog alertDialog = alert.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        if (!fieldOfWork.equals("") || !invOrCap.equals("") || !shortBio.equals("")) {
+            txt_field_of_work.setText(fieldOfWork);
+            txt_invRound.setText(invOrCap);
+            txt_shortbio.setText(shortBio);
+        }
+        btn_okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fieldOfWork = txt_field_of_work.getText().toString();
+                invOrCap = txt_invRound.getText().toString();
+                shortBio = txt_shortbio.getText().toString();
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
 
     public void signInUsers() {
@@ -161,7 +198,9 @@ public class SignupActivity extends AppCompatActivity {
         imageUrl = "default";
         userId = currentUser.getUid();
         String userTypeString = userType.getText().toString();
-        databaseViewModel.addUserDatabase(userId, userName, email, timeStamp, imageUrl, userTypeString);
+
+        databaseViewModel.addUserDatabase(userId, userName, email, timeStamp, imageUrl,
+                userTypeString, fieldOfWork, shortBio, invOrCap);
         databaseViewModel.successAddUserDb.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -202,6 +241,9 @@ public class SignupActivity extends AppCompatActivity {
         userType = findViewById(R.id.toggle_user_type);
         personalData = findViewById(R.id.personal_data);
 
+        fieldOfWork = "";
+        invOrCap = "";
+        shortBio = "";
         context = SignupActivity.this;
         signInViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getApplication()))
