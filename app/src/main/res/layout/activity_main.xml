@@ -24,6 +24,16 @@
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/nav_manu_main"
         tools:ignore="MissingConstraints" />
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottom_navigation_startups"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:background="@color/white"-->
+<!--        app:itemIconSize="35dp"-->
+<!--        app:itemIconTint="@drawable/bottom_navigation_color_selector"-->
+<!--        app:labelVisibilityMode="unlabeled"-->
+<!--        app:menu="@menu/nav_manu_main"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
 
     <androidx.fragment.app.FragmentContainerView
