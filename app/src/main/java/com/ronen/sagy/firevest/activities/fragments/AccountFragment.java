@@ -119,7 +119,7 @@ public class AccountFragment extends Fragment {
 
         db = Room.databaseBuilder(getActivity().getApplicationContext(),
                 AppDatabase.class, "database-name").allowMainThreadQueries().build();
-        databaseViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
+        databaseViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
                 .getInstance(Objects.requireNonNull(getActivity()).getApplication()))
                 .get(DatabaseViewModel.class);
 
