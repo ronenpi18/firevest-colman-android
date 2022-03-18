@@ -1,15 +1,17 @@
 package com.ronen.sagy.firevest.activities.fragments;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -23,28 +25,29 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
-import com.mindorks.placeholderview.SwipeDecor;
-import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.ronen.sagy.firevest.R;
 import com.ronen.sagy.firevest.Utils;
+import com.ronen.sagy.firevest.activities.fragments.swipe_view.CardContainer;
+import com.ronen.sagy.firevest.activities.fragments.swipe_view.CardModel;
+import com.ronen.sagy.firevest.activities.fragments.swipe_view.SimpleCardStackAdapter;
+import com.ronen.sagy.firevest.custom_widgets.swiper.SwipeFlingAdapterView;
 import com.ronen.sagy.firevest.entities.SwipedList;
-import com.ronen.sagy.firevest.entities.TinderCard;
 import com.ronen.sagy.firevest.services.model.AppDatabase;
 import com.ronen.sagy.firevest.services.model.ChatList;
 import com.ronen.sagy.firevest.services.model.Users;
 import com.ronen.sagy.firevest.viewModel.DatabaseViewModel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
 public class SwipeFeedFragment extends Fragment {
-
-
+    SimpleCardStackAdapter adapter;
+    private CardContainer cardContainer;
     private static final String TAG = "";
     private View rootLayout;
     private FloatingActionButton fabLike, fabSkip;
@@ -53,11 +56,12 @@ public class SwipeFeedFragment extends Fragment {
     private ArrayList<Users> mUSer;
     private AppDatabase database;
     private List<SwipedList> list = new ArrayList<>();
-
-    private SwipePlaceHolderView mSwipeView;
+    ArrayList<Users> al;
+    ArrayAdapter<Users> arrayAdapter;
+    //    private SwipePlaceHolderView mSwipeView;
     private Context mContext;
     private String currentUserId;
-
+    int i = 0;
     private View zeroStateLayout;
     private ImageView zeroStateCenteredImg, imgAnim1, imgAnim2;
     private Handler handlerAnimation;
@@ -78,7 +82,7 @@ public class SwipeFeedFragment extends Fragment {
         // Inflate the layout for this fragment
         rootLayout = inflater.inflate(R.layout.fragment_swipe_feed, container, false);
         databaseViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
-                .getInstance(Objects.requireNonNull(getActivity()).getApplication()))
+                .getInstance(requireActivity().getApplication()))
                 .get(DatabaseViewModel.class);
 
         database = AppDatabase.getInstance(rootLayout.getContext());
@@ -87,7 +91,7 @@ public class SwipeFeedFragment extends Fragment {
             list.addAll(database.swipedDao().getAll());
         } catch (SQLiteException e) {
 
-            Log.d(TAG, "onCreateView: "+e.toString());
+            Log.d(TAG, "onCreateView: " + e.toString());
         }
         mUSer = new ArrayList<>();
         userList = new ArrayList<>();
@@ -101,7 +105,13 @@ public class SwipeFeedFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         startUpsLists();
 
-        mSwipeView = view.findViewById(R.id.swipeView);
+        cardContainer = (CardContainer) view.findViewById(R.id.layoutview);
+
+        Resources r = getResources();
+
+        adapter = new SimpleCardStackAdapter(view.getContext());
+
+//        mSwipeView = view.findViewById(R.id.swipeView);
         fabLike = view.findViewById(R.id.fabLike);
         fabSkip = view.findViewById(R.id.fabSkip);
         mContext = getActivity();
@@ -117,55 +127,77 @@ public class SwipeFeedFragment extends Fragment {
 
         int bottomMargin = Utils.dpToPx(100);
         Point windowSize = Utils.getDisplaySize(getActivity().getWindowManager());
-        mSwipeView.getBuilder()
-                .setDisplayViewCount(3)
-                .setSwipeDecor(new SwipeDecor()
-                        .setViewWidth(windowSize.x)
-                        .setViewHeight(windowSize.y - bottomMargin)
-                        .setViewGravity(Gravity.TOP)
-                        .setPaddingTop(20)
-                        .setRelativeScale(0.01f)
-                        .setSwipeInMsgLayoutId(R.layout.tinder_swipe_in_msg_view)
-                        .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
+//        mSwipeView.getBuilder()
+//                .setDisplayViewCount(3)
+//                .setSwipeDecor(new SwipeDecor()
+//                        .setViewWidth(windowSize.x)
+//                        .setViewHeight(windowSize.y - bottomMargin)
+//                        .setViewGravity(Gravity.TOP)
+//                        .setPaddingTop(20)
+//                        .setRelativeScale(0.01f)
+//                        .setSwipeInMsgLayoutId(R.layout.tinder_swipe_in_msg_view)
+//                        .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
+//
+//        mSwipeView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
 
-        mSwipeView.setOnClickListener(new View.OnClickListener() {
+
+        CardModel cardModel = new CardModel("Title1", "Description goes here", r.getDrawable(R.drawable.picture1));
+        cardModel.setOnClickListener(new CardModel.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void OnClickListener() {
+                Log.i("Swipeable Cards", "I am pressing the card");
             }
         });
 
-        fabSkip.setOnClickListener(v -> {
-            if (!mUSer.isEmpty()) {
-                animateFab(fabSkip);
-                mSwipeView.doSwipe(false);
-                Users located_user = mUSer.get(mUSer.size() - 1);
-
+        cardModel.setOnCardDismissedListener(new CardModel.OnCardDismissedListener() {
+            @Override
+            public void onLike() {
+                Log.i("Swipeable Cards", "I like the card");
             }
+
+            @Override
+            public void onDislike() {
+                Log.i("Swipeable Cards", "I dislike the card");
+            }
+        });
+
+
+        fabSkip.setOnClickListener(v -> {
+//            if (!mUSer.isEmpty()) {
+//                animateFab(fabSkip);
+//                mSwipeView.doSwipe(false);
+//                Users located_user = mUSer.get(mUSer.size() - 1);
+//
+//            }
         });
 
         fabLike.setOnClickListener(v -> {
-            if (!mUSer.isEmpty()) {
-                animateFab(fabLike);
-                mSwipeView.doSwipe(true);
-                long tsLong = System.currentTimeMillis();
-                String timeStamp = Long.toString(tsLong);
-                databaseViewModel.addChatDb(mUSer.get(mUSer.size() - 1).getId(), currentUserId, "Hey, I would like to invest!", timeStamp);
-                databaseViewModel.successAddChatDb.observe(this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(Boolean aBoolean) {
-                        if (aBoolean) {
-                            // Toast.makeText(MessageActivity.this, "Sent.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getActivity(), "Message can't be sent.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                Users located_user = mUSer.get(mUSer.size() - 1);
-                database.swipedDao().insertAll(located_user.getEmailId(),
-                        located_user.getId(), located_user.getUsername(), "Hey, I would like to invest!");
-//            mUSer.remove(mUSer.size() - 1);
-            }
+//            if (!mUSer.isEmpty()) {
+//                animateFab(fabLike);
+////                mSwipeView.doSwipe(true);
+//                long tsLong = System.currentTimeMillis();
+//                String timeStamp = Long.toString(tsLong);
+//                databaseViewModel.addChatDb(mUSer.get(mUSer.size() - 1).getId(), currentUserId, "Hey, I would like to invest!", timeStamp);
+//                databaseViewModel.successAddChatDb.observe(this, new Observer<Boolean>() {
+//                    @Override
+//                    public void onChanged(Boolean aBoolean) {
+//                        if (aBoolean) {
+//                            // Toast.makeText(MessageActivity.this, "Sent.", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(getActivity(), "Message can't be sent.", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//                Users located_user = mUSer.get(mUSer.size() - 1);
+//                database.swipedDao().insertAll(located_user.getEmailId(),
+//                        located_user.getId(), located_user.getUsername(), "Hey, I would like to invest!");
+////            mUSer.remove(mUSer.size() - 1);
+//            }
         });
 
 
@@ -182,7 +214,7 @@ public class SwipeFeedFragment extends Fragment {
 
     private void startUpsLists() {
         databaseViewModel.fetchingUserDataCurrent();
-        databaseViewModel.fetchUserCurrentData.observe(this, new Observer<DataSnapshot>() {
+        databaseViewModel.fetchUserCurrentData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
 
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
@@ -193,7 +225,7 @@ public class SwipeFeedFragment extends Fragment {
         });
 
         databaseViewModel.fetchUserByNameAll();
-        databaseViewModel.fetchUserNames.observe(this, new Observer<DataSnapshot>() {
+        databaseViewModel.fetchUserNames.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -206,9 +238,19 @@ public class SwipeFeedFragment extends Fragment {
                             mUSer.add(user);
                         }
                     }
+                    //                        mSwipeView.addView(new TinderCard(mContext, profile, mSwipeView));
+//                    al.addAll(mUSer);
                     for (Users profile : mUSer) {
-                        mSwipeView.addView(new TinderCard(mContext, profile, mSwipeView));
+                        Drawable drawable = null;
+                        CardModel cardModel = new CardModel(profile.getUsername(),
+                                profile.getInvestmentStageOrCapital() + ", " + profile.getFieldOfWork(),
+                                profile.getImageUrl());
+                        adapter.add(cardModel);
+//                        al.add(profile);
+//                        mSwipeView.addView(new TinderCard(mContext, profile, mSwipeView));
                     }
+                    cardContainer.setAdapter(adapter);
+
 //                    userFragmentAdapter = new UserFragmentAdapter(mUSer, context, false);
 //                    recyclerView.setAdapter(userFragmentAdapter);
 
