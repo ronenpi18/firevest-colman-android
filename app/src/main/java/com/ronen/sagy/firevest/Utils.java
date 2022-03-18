@@ -4,7 +4,11 @@ package com.ronen.sagy.firevest;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -12,11 +16,34 @@ import android.view.WindowManager;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Utils {
 
     private static final String TAG = "Utils";
 
+    public static Drawable drawableFromUrl(String url) throws IOException {
+        Bitmap x;
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+            connection.connect();
+            InputStream input = connection.getInputStream();
+
+            x = BitmapFactory.decodeStream(input);
+            return new BitmapDrawable(Resources.getSystem(), x);
+        } catch (Exception e) {
+            Log.e(TAG, "drawableFromUrl: ", e);
+        }
+        return null;
+    }
+
+    public static float functionNormalize(int max, int min, int value) {
+        int intermediateValue = max - min;
+        value -= intermediateValue;
+        float var = Math.abs((float) value / (float) intermediateValue);
+        return Math.abs((float) value / (float) intermediateValue);
+    }
 //    public static List<Users> loadProfiles(Context context) {
 //        try {
 //            GsonBuilder builder = new GsonBuilder();
@@ -34,8 +61,6 @@ public class Utils {
 //            return null;
 //        }
 //    }
-
-
 
 
     private static String loadJSONFromAsset(Context context, String jsonFileName) {
