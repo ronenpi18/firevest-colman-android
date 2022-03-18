@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_accountFragment_to_setupProfileActivity"
             app:destination="@id/setupProfileActivity" />
+        <action
+            android:id="@+id/action_accountFragment_to_signupActivity"
+            app:destination="@id/signupActivity" />
     </fragment>
     <fragment
         android:id="@+id/swipeFeedFragment"
@@ -43,4 +46,9 @@
         android:name="com.ronen.sagy.firevest.activities.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <activity
+        android:id="@+id/signupActivity"
+        android:name="com.ronen.sagy.firevest.activities.SignupActivity"
+        android:label="activity_signup"
+        tools:layout="@layout/activity_signup" />
 </navigation>
