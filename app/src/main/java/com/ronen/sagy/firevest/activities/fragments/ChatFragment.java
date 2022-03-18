@@ -73,12 +73,12 @@ public class ChatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootLayout = inflater.inflate(R.layout.fragment_chat, container, false);
-        databaseViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
-                .getInstance(Objects.requireNonNull(getActivity()).getApplication()))
+        databaseViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().getApplication()))
                 .get(DatabaseViewModel.class);
 
-        logInViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
-                .getInstance(Objects.requireNonNull(getActivity()).getApplication()))
+        logInViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().getApplication()))
                 .get(LogInViewModel.class);
 
 //        relative_layout_chat_fragment = rootLayout.findViewById(R.id.relative_layout_chat_fragment);
@@ -192,7 +192,7 @@ public class ChatFragment extends Fragment {
 
     private void fetchAllChat() {
         databaseViewModel.fetchingUserDataCurrent();
-        databaseViewModel.fetchUserCurrentData.observe(this, new Observer<DataSnapshot>() {
+        databaseViewModel.fetchUserCurrentData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
                 Users users = dataSnapshot.getValue(Users.class);
@@ -202,7 +202,7 @@ public class ChatFragment extends Fragment {
         });
 
         databaseViewModel.getChaListUserDataSnapshot(currentUserId);
-        databaseViewModel.getChaListUserDataSnapshot.observe(this, new Observer<DataSnapshot>() {
+        databaseViewModel.getChaListUserDataSnapshot.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
