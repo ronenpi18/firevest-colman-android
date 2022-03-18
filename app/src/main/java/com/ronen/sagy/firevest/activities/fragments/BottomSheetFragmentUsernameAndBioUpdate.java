@@ -67,8 +67,8 @@ public class BottomSheetFragmentUsernameAndBioUpdate extends BottomSheetDialogFr
     }
 
     private void init(View view) {
-        databaseViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
-                .getInstance(Objects.requireNonNull(getActivity()).getApplication()))
+        databaseViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().getApplication()))
                 .get(DatabaseViewModel.class);
 
         et_user_input_bottom_sheet_fragment = view.findViewById(R.id.et_user_input_bottom_sheet_fragment);
