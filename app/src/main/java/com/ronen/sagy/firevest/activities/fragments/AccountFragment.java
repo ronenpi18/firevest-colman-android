@@ -1,33 +1,28 @@
 package com.ronen.sagy.firevest.activities.fragments;
 
-import static android.app.Activity.RESULT_OK;
-
+import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.room.Room;
-
-import android.provider.MediaStore;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
@@ -40,17 +35,17 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.ronen.sagy.firevest.R;
 import com.ronen.sagy.firevest.activities.SignupActivity;
-import com.ronen.sagy.firevest.adapters.SliderAdapter;
+//import com.ronen.sagy.firevest.adapters.SliderAdapter;
 import com.ronen.sagy.firevest.services.model.AppDatabase;
 import com.ronen.sagy.firevest.services.model.Users;
 import com.ronen.sagy.firevest.viewModel.DatabaseViewModel;
-import com.smarteist.autoimageslider.IndicatorAnimations;
-import com.smarteist.autoimageslider.SliderAnimations;
-import com.smarteist.autoimageslider.SliderView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Objects;
+
+import static android.app.Activity.RESULT_OK;
+import static android.content.Context.ACTIVITY_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,6 +59,7 @@ public class AccountFragment extends Fragment {
     DatabaseViewModel databaseViewModel;
     View rootLayout;
     TextView titleName;
+    TextView biodisplay;
     TextView fieldOfWork;
     ImageButton editProfile;
     ImageView btn_profile_image_change;
@@ -79,7 +75,7 @@ public class AccountFragment extends Fragment {
     String userBio;
     AppDatabase db;
 
-    private SliderView sliderView;
+//    private SliderView sliderView;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -92,9 +88,9 @@ public class AccountFragment extends Fragment {
         rootLayout = inflater.inflate(R.layout.fragment_account, container, false);
         init(rootLayout);
 
-        sliderView = rootLayout.findViewById(R.id.slider_view);
+//        sliderView = rootLayout.findViewById(R.id.slider_view);
 
-        final SliderAdapter adapter = new SliderAdapter(getActivity());
+//        final SliderAdapter adapter = new SliderAdapter(getActivity());
         try {
             fetchCurrentUserdata();
         } catch (Exception e) {
@@ -102,19 +98,30 @@ public class AccountFragment extends Fragment {
 
         }
 
-        sliderView.setSliderAdapter(adapter);
+//        sliderView.setSliderAdapter(adapter);
+//
+//        sliderView.setIndicatorAnimation(IndicatorAnimations.SLIDE);
+//        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+//        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
+//        sliderView.startAutoCycle();
 
-        sliderView.setIndicatorAnimation(IndicatorAnimations.SLIDE);
-        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
-        sliderView.startAutoCycle();
+
         rootLayout.findViewById(R.id.edit_profile_pen).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavHostFragment.findNavController(AccountFragment.this).navigate(R.id.action_accountFragment_to_setupProfileActivity);
             }
         });
+        rootLayout.findViewById(R.id.signoutbtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), SignupActivity.class);
+                startActivity(i);
+                ((ActivityManager)getActivity().getApplicationContext()
+                        .getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData();
 
+            }
+        });
         return rootLayout;
     }
 
@@ -123,11 +130,12 @@ public class AccountFragment extends Fragment {
         db = Room.databaseBuilder(getActivity().getApplicationContext(),
                 AppDatabase.class, "database-name").allowMainThreadQueries().build();
         databaseViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
-                .getInstance(Objects.requireNonNull(getActivity()).getApplication()))
+                .getInstance(requireActivity().getApplication()))
                 .get(DatabaseViewModel.class);
 
         titleName = view.findViewById(R.id.First_title_account);
         fieldOfWork = view.findViewById(R.id.second_title_account);
+        biodisplay = view.findViewById(R.id.biodisplay);
         btn_profile_image_change = view.findViewById(R.id.profile_image_account);
 //        UserDao userDao = db.userDao();
 //        List<Users> user = userDao.getAll();
@@ -170,6 +178,7 @@ public class AccountFragment extends Fragment {
                         titleName.setText(user.getUsername());
                     }
                     fieldOfWork.setText(user.getFieldOfWork());
+                    biodisplay.setText(user.getBio());
 
 //                    tv_profile_fragment_bio.setText(userBio);
                     if (imageUrl.equals("default")) {
@@ -194,7 +203,7 @@ public class AccountFragment extends Fragment {
 
             Bitmap bmp = null;
             try {
-                bmp = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), data.getData());
+                bmp = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), data.getData());
             } catch (IOException e) {
                 e.printStackTrace();
             }
