@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.ronen.sagy.firevest.R;
 import com.ronen.sagy.firevest.Utils;
@@ -47,6 +48,7 @@ import java.util.List;
  */
 public class SwipeFeedFragment extends Fragment {
     SimpleCardStackAdapter adapter;
+    CardModel cardModel;
     private CardContainer cardContainer;
     private static final String TAG = "";
     private View rootLayout;
@@ -86,6 +88,7 @@ public class SwipeFeedFragment extends Fragment {
                 .get(DatabaseViewModel.class);
 
         database = AppDatabase.getInstance(rootLayout.getContext());
+        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         list.clear();
         try {
             list.addAll(database.swipedDao().getAll());
@@ -109,7 +112,7 @@ public class SwipeFeedFragment extends Fragment {
 
         Resources r = getResources();
 
-        adapter = new SimpleCardStackAdapter(view.getContext());
+        adapter = new SimpleCardStackAdapter(view.getContext(), databaseViewModel, currentUserId, this);
 
 //        mSwipeView = view.findViewById(R.id.swipeView);
         fabLike = view.findViewById(R.id.fabLike);
@@ -125,49 +128,9 @@ public class SwipeFeedFragment extends Fragment {
                 .apply(new RequestOptions().circleCrop())
                 .into(zeroStateCenteredImg);
 
-        int bottomMargin = Utils.dpToPx(100);
-        Point windowSize = Utils.getDisplaySize(getActivity().getWindowManager());
-//        mSwipeView.getBuilder()
-//                .setDisplayViewCount(3)
-//                .setSwipeDecor(new SwipeDecor()
-//                        .setViewWidth(windowSize.x)
-//                        .setViewHeight(windowSize.y - bottomMargin)
-//                        .setViewGravity(Gravity.TOP)
-//                        .setPaddingTop(20)
-//                        .setRelativeScale(0.01f)
-//                        .setSwipeInMsgLayoutId(R.layout.tinder_swipe_in_msg_view)
-//                        .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
-//
-//        mSwipeView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-
-
-        CardModel cardModel = new CardModel("Title1", "Description goes here", r.getDrawable(R.drawable.picture1));
-        cardModel.setOnClickListener(new CardModel.OnClickListener() {
-            @Override
-            public void OnClickListener() {
-                Log.i("Swipeable Cards", "I am pressing the card");
-            }
-        });
-
-        cardModel.setOnCardDismissedListener(new CardModel.OnCardDismissedListener() {
-            @Override
-            public void onLike() {
-                Log.i("Swipeable Cards", "I like the card");
-            }
-
-            @Override
-            public void onDislike() {
-                Log.i("Swipeable Cards", "I dislike the card");
-            }
-        });
-
 
         fabSkip.setOnClickListener(v -> {
+
 //            if (!mUSer.isEmpty()) {
 //                animateFab(fabSkip);
 //                mSwipeView.doSwipe(false);
@@ -220,7 +183,7 @@ public class SwipeFeedFragment extends Fragment {
             public void onChanged(DataSnapshot dataSnapshot) {
                 Users users = dataSnapshot.getValue(Users.class);
                 assert users != null;
-                currentUserId = users.getId();
+//                currentUserId = users.getId();
             }
         });
 
@@ -242,12 +205,11 @@ public class SwipeFeedFragment extends Fragment {
 //                    al.addAll(mUSer);
                     for (Users profile : mUSer) {
                         Drawable drawable = null;
-                        CardModel cardModel = new CardModel(profile.getUsername(),
+                        cardModel = new CardModel(profile.getUsername(),
                                 profile.getInvestmentStageOrCapital() + ", " + profile.getFieldOfWork(),
-                                profile.getImageUrl());
+                                profile.getImageUrl(), profile.getId());
                         adapter.add(cardModel);
-//                        al.add(profile);
-//                        mSwipeView.addView(new TinderCard(mContext, profile, mSwipeView));
+
                     }
                     cardContainer.setAdapter(adapter);
 
