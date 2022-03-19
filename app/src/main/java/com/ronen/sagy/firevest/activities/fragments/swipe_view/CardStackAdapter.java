@@ -13,14 +13,10 @@ import java.util.Collection;
 public abstract class CardStackAdapter extends BaseCardStackAdapter {
 	private final Context context;
 
-	/**
-	 * Lock used to modify the content of {@link #data}. Any write operation
-	 * performed on the deque should be synchronized on this lock.
-	 */
 	private final Object lock = new Object();
 	private ArrayList<CardModel> data;
 
-    private boolean shouldFillCardBackground = false;
+    private boolean shouldFillCardBackground = true;
 
     public CardStackAdapter(Context context) {
 		this.context = context;
