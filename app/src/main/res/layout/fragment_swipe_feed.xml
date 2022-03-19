@@ -2,19 +2,44 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whiteGray">
+    android:background="@color/whiteGray"
+    android:orientation="vertical">
 
+
+    <ImageView
+        android:id="@+id/imgCentered"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo_firevest" />
+
+    <ImageView
+        android:id="@+id/imgAnim1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo_firevest" />
+
+    <ImageView
+        android:id="@+id/imgAnim2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo_firevest" />
 
     <LinearLayout
+        android:id="@+id/button_like_and_dislike"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -27,13 +52,13 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_margin="8dp"
+                android:backgroundTint="@android:color/white"
                 android:clickable="true"
                 android:focusable="true"
-                android:backgroundTint="@android:color/white"
+                app:borderWidth="0dp"
                 app:fabSize="normal"
                 app:rippleColor="@null"
-                app:borderWidth="0dp"
-                app:srcCompat="@drawable/skip"/>
+                app:srcCompat="@drawable/skip" />
 
         </RelativeLayout>
 
@@ -48,67 +73,49 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_margin="8dp"
+                android:backgroundTint="@android:color/white"
                 android:clickable="true"
                 android:focusable="true"
-                android:backgroundTint="@android:color/white"
+                app:borderWidth="0dp"
                 app:fabSize="normal"
                 app:rippleColor="@null"
-                app:borderWidth="0dp"
-                app:srcCompat="@drawable/ic_like_24dp"/>
+                app:srcCompat="@drawable/ic_like_24dp" />
 
         </RelativeLayout>
 
 
     </LinearLayout>
-    <ImageView
-        android:layout_width="150dp"
-        android:id="@+id/imgCentered"
-        android:layout_height="150dp"
-        android:layout_centerInParent="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/logo_firevest"/>
-
-    <ImageView
-        android:layout_width="150dp"
-        android:id="@+id/imgAnim1"
-        android:layout_height="150dp"
-        android:layout_centerInParent="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/logo_firevest"/>
-
-    <ImageView
-        android:layout_width="150dp"
-        android:id="@+id/imgAnim2"
-        android:layout_height="150dp"
-        android:layout_centerInParent="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/logo_firevest"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </LinearLayout>
+
     <com.ronen.sagy.firevest.activities.fragments.swipe_view.CardContainer
         android:id="@+id/layoutview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"/>
+        android:layout_width="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_like_and_dislike"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp" />
 
-<!--    <com.ronen.sagy.firevest.custom_widgets.swiper.SwipeFlingAdapterView-->
-<!--        android:id="@+id/frame"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginBottom="75dp"-->
-<!--        android:background="#ffeee9e2"-->
-<!--        app:rotation_degrees="15.5"-->
-<!--        tools:context=".MyActivity" />-->
+    <!--    <com.ronen.sagy.firevest.custom_widgets.swiper.SwipeFlingAdapterView-->
+    <!--        android:id="@+id/frame"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_marginBottom="75dp"-->
+    <!--        android:background="#ffeee9e2"-->
+    <!--        app:rotation_degrees="15.5"-->
+    <!--        tools:context=".MyActivity" />-->
 
     <!--    <com.mindorks.placeholderview.SwipePlaceHolderView-->
-<!--        android:id="@+id/swipeView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginBottom="75dp" />-->
+    <!--        android:id="@+id/swipeView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_marginBottom="75dp" />-->
 
 
 </RelativeLayout>

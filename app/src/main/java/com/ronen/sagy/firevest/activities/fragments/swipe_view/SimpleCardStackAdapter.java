@@ -23,7 +23,10 @@ public final class SimpleCardStackAdapter extends CardStackAdapter {
 			convertView = inflater.inflate(R.layout.std_card_inner, parent, false);
 			assert convertView != null;
 		}
-		Glide.with(getContext()).load(model.getImageUrl()).into(((ImageView) convertView.findViewById(R.id.image)));
+		Glide.with(getContext())
+				.load(model.getImageUrl())
+				.placeholder(R.drawable.sample_img)
+				.into(((ImageView) convertView.findViewById(R.id.image)));
 
 //		((ImageView) convertView.findViewById(R.id.image)).setImageDrawable(model.getCardImageDrawable());
 		((TextView) convertView.findViewById(R.id.title)).setText(model.getTitle());

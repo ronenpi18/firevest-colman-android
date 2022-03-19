@@ -142,7 +142,7 @@ public class CardContainer extends AdapterView<ListAdapter> {
             if (orientation == Orientations.Orientation.Disordered) {
                 view.setRotation(getDisorderedRotation());
             }
-            addViewInLayout(view, 0, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
+            addViewInLayout(view, 0, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT,
                     listAdapter.getItemViewType(nextAdapterPosition)), false);
 
             requestLayout();
@@ -449,13 +449,6 @@ public class CardContainer extends AdapterView<ListAdapter> {
         }
     }
 
-    /**
-     * Public function for allow dismiss cards directly from the CardContainer
-     * IE: mCardContainer.leave(-1000, 45);
-     *
-     * @param velocityX
-     * @param velocityY
-     */
     public void leave(float velocityX, float velocityY) {
         if (!locked) {
             locked = true; // Lock swipe until current card is dismissed
