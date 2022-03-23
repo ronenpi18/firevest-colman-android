@@ -58,13 +58,13 @@ public final class SimpleCardStackAdapter extends CardStackAdapter {
             public void onLike() {
                 long tsLong = System.currentTimeMillis();
                 String timeStamp = Long.toString(tsLong);
-                Toast.makeText(getContext(), "LIKE!!!" + model.getUid(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "LIKE!!!" + model.getUid(), Toast.LENGTH_SHORT).show();
                 databaseViewModel.addChatDb(model.getUid(), currentUserId, "Hey, I would like to invest!", timeStamp);
                 databaseViewModel.successAddChatDb.observe(lifecycleOwner, new Observer<Boolean>() {
                     @Override
                     public void onChanged(Boolean aBoolean) {
                         if (aBoolean) {
-                            Toast.makeText(getContext(), "Sent.", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getContext(), "Sent.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getContext(), "Message can't be sent.", Toast.LENGTH_SHORT).show();
                         }

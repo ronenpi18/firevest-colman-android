@@ -213,7 +213,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean)
-                    Toast.makeText(context, "user created successfully", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "user created successfully", Toast.LENGTH_SHORT).show();
 
                 else {
                     Toast.makeText(context, "ERROR WHILE ADDING DATA IN DATABASE.", Toast.LENGTH_SHORT).show();
