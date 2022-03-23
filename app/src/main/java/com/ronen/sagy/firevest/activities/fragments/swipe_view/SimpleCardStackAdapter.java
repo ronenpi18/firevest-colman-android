@@ -50,7 +50,7 @@ public final class SimpleCardStackAdapter extends CardStackAdapter {
         model.setOnClickListener(new CardModel.OnClickListener() {
             @Override
             public void OnClickListener() {
-                Toast.makeText(getContext(), "CLICKED", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "CLICKED", Toast.LENGTH_SHORT).show();
             }
         });
         model.setOnCardDismissedListener(new CardModel.OnCardDismissedListener() {

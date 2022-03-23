@@ -140,6 +140,12 @@ public class AccountFragment extends Fragment {
                 openImage();
             }
         });
+        biodisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openBottomSheet(false);
+            }
+        });
     }
 
     private void openImage() {

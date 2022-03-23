@@ -36,11 +36,11 @@
         android:name="com.ronen.sagy.firevest.activities.fragments.ChatFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-    <activity
+    <fragment
         android:id="@+id/setupProfileActivity"
-        android:name="com.ronen.sagy.firevest.activities.SetupProfileActivity"
+        android:name="com.ronen.sagy.firevest.activities.fragments.AboutYouFormFragment"
         android:label="activity_setup_profile"
-        tools:layout="@layout/activity_setup_profile" />
+        tools:layout="@layout/fragment_about_you_form" />
     <activity
         android:id="@+id/loginActivity"
         android:name="com.ronen.sagy.firevest.activities.LoginActivity"
