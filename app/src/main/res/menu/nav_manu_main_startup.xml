@@ -6,11 +6,6 @@
         android:title="Profile" />
 
     <item
-        android:id="@+id/fire"
-        android:icon="@drawable/logo_firevest"
-        android:title="Swipes" />
-
-    <item
         android:id="@+id/chat"
         android:icon="@drawable/chat_processing"
         android:title="Chat" />

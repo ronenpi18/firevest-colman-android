@@ -75,8 +75,6 @@ public class AccountFragment extends Fragment {
     String userBio;
     AppDatabase db;
 
-//    private SliderView sliderView;
-
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -88,23 +86,12 @@ public class AccountFragment extends Fragment {
         rootLayout = inflater.inflate(R.layout.fragment_account, container, false);
         init(rootLayout);
 
-//        sliderView = rootLayout.findViewById(R.id.slider_view);
-
-//        final SliderAdapter adapter = new SliderAdapter(getActivity());
         try {
             fetchCurrentUserdata();
         } catch (Exception e) {
             NavHostFragment.findNavController(AccountFragment.this).navigate(R.id.loginActivity);
 
         }
-
-//        sliderView.setSliderAdapter(adapter);
-//
-//        sliderView.setIndicatorAnimation(IndicatorAnimations.SLIDE);
-//        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-//        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
-//        sliderView.startAutoCycle();
-
 
         rootLayout.findViewById(R.id.edit_profile_pen).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +104,7 @@ public class AccountFragment extends Fragment {
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), SignupActivity.class);
                 startActivity(i);
-                ((ActivityManager)getActivity().getApplicationContext()
+                ((ActivityManager) getActivity().getApplicationContext()
                         .getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData();
 
             }
@@ -179,8 +166,6 @@ public class AccountFragment extends Fragment {
                     }
                     fieldOfWork.setText(user.getFieldOfWork());
                     biodisplay.setText(user.getBio());
-
-//                    tv_profile_fragment_bio.setText(userBio);
                     if (imageUrl.equals("default")) {
                         btn_profile_image_change.setImageResource(R.drawable.sample_img);
                     } else {

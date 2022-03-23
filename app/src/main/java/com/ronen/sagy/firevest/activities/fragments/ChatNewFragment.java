@@ -1,8 +1,5 @@
 package com.ronen.sagy.firevest.activities.fragments;
 
-import static android.content.ContentValues.TAG;
-
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,19 +18,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.installations.FirebaseInstallations;
-import com.ronen.sagy.firevest.R;
-import com.ronen.sagy.firevest.services.model.ChatList;
-import com.ronen.sagy.firevest.services.model.Users;
-import com.ronen.sagy.firevest.adapters.UserFragmentAdapter;
-import com.ronen.sagy.firevest.viewModel.DatabaseViewModel;
-import com.ronen.sagy.firevest.viewModel.LogInViewModel;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.ronen.sagy.firevest.R;
+import com.ronen.sagy.firevest.adapters.UserFragmentAdapter;
+import com.ronen.sagy.firevest.services.model.ChatList;
+import com.ronen.sagy.firevest.services.model.Users;
+import com.ronen.sagy.firevest.viewModel.DatabaseViewModel;
+import com.ronen.sagy.firevest.viewModel.LogInViewModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
+
+import static android.content.ContentValues.TAG;
 
 public class ChatNewFragment extends Fragment {
     private Context context;
@@ -81,7 +77,7 @@ public class ChatNewFragment extends Fragment {
 
     private void fetchAllChat() {
         databaseViewModel.fetchingUserDataCurrent();
-        databaseViewModel.fetchUserCurrentData.observe(this, new Observer<DataSnapshot>() {
+        databaseViewModel.fetchUserCurrentData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
                 Users users = dataSnapshot.getValue(Users.class);
@@ -91,7 +87,7 @@ public class ChatNewFragment extends Fragment {
         });
 
         databaseViewModel.getChaListUserDataSnapshot(currentUserId);
-        databaseViewModel.getChaListUserDataSnapshot.observe(this, new Observer<DataSnapshot>() {
+        databaseViewModel.getChaListUserDataSnapshot.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
@@ -139,12 +135,12 @@ public class ChatNewFragment extends Fragment {
 
 
     private void init(View view) {
-        databaseViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
-                .getInstance(Objects.requireNonNull(getActivity()).getApplication()))
+        databaseViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().getApplication()))
                 .get(DatabaseViewModel.class);
 
-        logInViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
-                .getInstance(Objects.requireNonNull(getActivity()).getApplication()))
+        logInViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().getApplication()))
                 .get(LogInViewModel.class);
 
         relative_layout_chat_fragment = view.findViewById(R.id.relative_layout_chat_fragment);

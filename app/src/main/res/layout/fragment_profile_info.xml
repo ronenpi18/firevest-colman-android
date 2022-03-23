@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ronen.sagy.firevest.custom_widgets.BounceScrollView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f6F7FB"
+        tools:context=".fragments.AccountFragment"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/choose_inst2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="100dp"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="16sp"
+                    android:text="When ever you are ready, swipe -> "
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_view_center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/choose_inst"
+                    android:layout_width="204dp"
+                    android:text="Choose your profile image, This is your public image so choose wisely :)"
+
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="100dp"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/second_title_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=""
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="14sp" />
+
+                <com.ronen.sagy.firevest.custom_widgets.CircleImageView
+                    android:id="@+id/profile_image_account"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="4dp"
+                    android:src="@drawable/account_circle"
+                    app:layout_anchorGravity="top|center_horizontal"
+                    app:layout_scrollFlags="scroll" />
+
+                <!--                <com.smarteist.autoimageslider.SliderView-->
+                <!--                    android:id="@+id/slider_view"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="104dp"-->
+                <!--                    android:layout_marginTop="20dp"-->
+                <!--                    android:layout_marginBottom="20dp"-->
+                <!--                    app:sliderAnimationDuration="600"-->
+                <!--                    app:sliderAutoCycleDirection="back_and_forth"-->
+                <!--                    app:sliderAutoCycleEnabled="true"-->
+                <!--                    app:sliderCircularHandlerEnabled="true"-->
+                <!--                    app:sliderIndicatorAnimationDuration="600"-->
+                <!--                    app:sliderIndicatorGravity="center_horizontal|bottom"-->
+                <!--                    app:sliderIndicatorMargin="15dp"-->
+                <!--                    app:sliderIndicatorOrientation="horizontal"-->
+                <!--                    app:sliderIndicatorPadding="3dp"-->
+                <!--                    app:sliderIndicatorRadius="2dp"-->
+                <!--                    app:sliderIndicatorSelectedColor="@color/colorPrimary"-->
+                <!--                    app:sliderIndicatorUnselectedColor="@color/md_blue_100"-->
+                <!--                    app:sliderScrollTimeInSec="2"-->
+                <!--                    app:sliderStartAutoCycle="true" />-->
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:weightSum="30">
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</com.ronen.sagy.firevest.custom_widgets.BounceScrollView>

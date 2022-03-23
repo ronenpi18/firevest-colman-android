@@ -4,6 +4,8 @@ package com.ronen.sagy.firevest.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
@@ -13,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,8 +24,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavig
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.google.firebase.database.DataSnapshot;
 import com.ronen.sagy.firevest.R;
 import com.ronen.sagy.firevest.services.model.AppDatabase;
+import com.ronen.sagy.firevest.services.model.Users;
+import com.ronen.sagy.firevest.viewModel.DatabaseViewModel;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
@@ -30,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private ViewPager viewPager;
     NavHostFragment navHostFragment;
     AppDatabase db;
+    private DatabaseViewModel databaseViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +47,16 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.addAuthStateListener(authStateListener);
+        databaseViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) ViewModelProvider.AndroidViewModelFactory
+                .getInstance(this.getApplication()))
+                .get(DatabaseViewModel.class);
+
         mContext = this;
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database-name").build();
 
         BottomNavigationView navView = findViewById(R.id.bottom_navigation);
+        BottomNavigationView navViewStartUp = findViewById(R.id.bottom_navigation2);
 //        BottomNavigationView navViewStartups = findViewById(R.id.bottom_navigation_startups);
 
 
@@ -65,8 +79,43 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 finish();
             }
             if (firebaseUser != null) {
-//                Toast.makeText(MainActivity.this, "Logged in @ MainActivity", Toast.LENGTH_SHORT).show();
+                try {
+                    databaseViewModel.fetchingUserDataCurrent();
+                databaseViewModel.fetchUserCurrentData.observe(
+                        navHostFragment.getViewLifecycleOwner(), new Observer<DataSnapshot>() {
+                            @Override
+                            public void onChanged(DataSnapshot dataSnapshot) {
+                                Users users = dataSnapshot.getValue(Users.class);
+                                assert users != null;
+                                if (users.getTypeOfUser().toLowerCase().equals("startup")) {
+                                    BottomNavigationView navView = findViewById(R.id.bottom_navigation);
+                                    BottomNavigationView navViewStartUp = findViewById(R.id.bottom_navigation2);
 
+                                    navViewStartUp.setVisibility(View.VISIBLE);
+
+                                    if (navHostFragment != null) {
+                                        NavigationUI.setupWithNavController(navViewStartUp, navHostFragment.getNavController());
+                                        navViewStartUp.setOnNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
+                                            @Override
+                                            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                                                switch (item.getItemId()) {
+                                                    case R.id.account:
+                                                        navHostFragment.getNavController().navigate(R.id.accountFragment);
+                                                        break;
+                                                    case R.id.chat:
+                                                        navHostFragment.getNavController().navigate(R.id.activityFragment);
+                                                        break;
+                                                }
+                                                return true;
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                } catch (Exception e)
+                {
+                }
             }
         }
     };

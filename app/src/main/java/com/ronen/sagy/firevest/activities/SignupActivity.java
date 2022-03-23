@@ -1,5 +1,6 @@
 package com.ronen.sagy.firevest.activities;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,10 +16,17 @@ import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavHost;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.ronen.sagy.firevest.R;
+import com.ronen.sagy.firevest.activities.fragments.AboutYouFormFragment;
+import com.ronen.sagy.firevest.activities.fragments.AccountFragment;
+import com.ronen.sagy.firevest.custom_widgets.TabbedDialog;
 import com.ronen.sagy.firevest.services.model.AppDatabase;
 import com.ronen.sagy.firevest.viewModel.DatabaseViewModel;
 import com.ronen.sagy.firevest.viewModel.SignInViewModel;
@@ -37,7 +45,6 @@ public class SignupActivity extends AppCompatActivity {
     EditText et_pwdSignIn;
     Button btn_signIn;
     TextView textToLogin;
-    TextView personalData;
     SignInViewModel signInViewModel;
     DatabaseViewModel databaseViewModel;
     String emailId;
@@ -68,12 +75,6 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void listeners() {
-        personalData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialog();
-            }
-        });
         btn_signIn.setOnClickListener(new View.OnClickListener() {
             final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
 
@@ -106,6 +107,8 @@ public class SignupActivity extends AppCompatActivity {
                     et_pwdSignIn.setClickable(false);
                     textToLogin.setClickable(false);
                     dismissKeyboard();
+
+
                     signInUsers();
                 }
             }
@@ -126,9 +129,8 @@ public class SignupActivity extends AppCompatActivity {
         View mView = getLayoutInflater().inflate(R.layout.custom_dialog_form, null);
         Button btn_okay = (Button) mView.findViewById(R.id.btn_okay);
 
-        txt_invRound = (EditText) mView.findViewById(R.id.inv_round);
-        txt_field_of_work = (EditText) mView.findViewById(R.id.field_of_work);
-        txt_shortbio = (EditText) mView.findViewById(R.id.shortbio);
+        txt_invRound = (EditText) mView.findViewById(R.id.RoundOfInv_txt);
+        txt_field_of_work = (EditText) mView.findViewById(R.id.field_txt);
 
         alert.setView(mView);
         final AlertDialog alertDialog = alert.create();
@@ -183,9 +185,15 @@ public class SignupActivity extends AppCompatActivity {
                     getUserSession();
                     addUserInDatabase(userName, emailId, userId);
 
-                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    getSupportFragmentManager().beginTransaction()
+                            .add(android.R.id.content,
+                                    new AboutYouFormFragment(
+                                            userName,
+                                            emailId,
+                                            pwd,
+                                            userType.getText().toString()))
+                            .commit();
+
                 }
             }
 
@@ -200,12 +208,12 @@ public class SignupActivity extends AppCompatActivity {
         String userTypeString = userType.getText().toString();
 
         databaseViewModel.addUserDatabase(userId, userName, email, timeStamp, imageUrl,
-                userTypeString, fieldOfWork, shortBio, invOrCap);
+                userTypeString, txt_field_of_work.getText().toString(), shortBio, txt_invRound.getText().toString());
         databaseViewModel.successAddUserDb.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean)
-                    Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "user created successfully", Toast.LENGTH_SHORT).show();
 
                 else {
                     Toast.makeText(context, "ERROR WHILE ADDING DATA IN DATABASE.", Toast.LENGTH_SHORT).show();
@@ -239,7 +247,9 @@ public class SignupActivity extends AppCompatActivity {
         btn_signIn = findViewById(R.id.btn_signin);
         textToLogin = findViewById(R.id.text_to_login);
         userType = findViewById(R.id.toggle_user_type);
-        personalData = findViewById(R.id.personal_data);
+
+        txt_invRound = (EditText) findViewById(R.id.RoundOfInv_txt);
+        txt_field_of_work = (EditText) findViewById(R.id.field_txt);
 
         fieldOfWork = "";
         invOrCap = "";
